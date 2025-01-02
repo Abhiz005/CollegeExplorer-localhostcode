@@ -11,7 +11,18 @@ const SearchIcon = ({ onSearch }) => {
   const suggestionRefs = useRef([]); // Refs for suggestion items
 
   // Static suggestions for demo purposes
-  const allSuggestions = ["BCom", "BSC_IT", "BA", "BAF", "BMM", "Bsc", "BMS"];
+  const allSuggestions = [
+    "BCom",
+    "BSC_IT",
+    "BSc_CS",
+    "BA",
+    "BAF",
+    "BMM",
+    "Bsc",
+    "BMS",
+    "BCom(Economics)",
+    "BCom(Economics & Analytics)",
+  ];
 
   // Handle toggling the expanded search box
   const handleClick = () => {
@@ -30,6 +41,7 @@ const SearchIcon = ({ onSearch }) => {
         suggestion.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filteredSuggestions);
+
       setIsSuggestionVisible(true); // Show suggestions
     } else {
       setIsSuggestionVisible(false); // Hide suggestions if input is empty
@@ -51,6 +63,7 @@ const SearchIcon = ({ onSearch }) => {
         onSearch(query);
       }
       setIsSuggestionVisible(false); // Hide suggestions
+      setExpanded(false); // Collapse the search input
     } else if (e.key === "ArrowDown") {
       // Handle arrow down to highlight the next suggestion
       setHighlightedIndex((prevIndex) =>
@@ -76,6 +89,7 @@ const SearchIcon = ({ onSearch }) => {
   const handleSuggestionClick = (suggestion) => {
     setQuery(suggestion); // Fill the input with the selected suggestion
     onSearch(suggestion); // Trigger search
+
     setIsSuggestionVisible(false); // Hide suggestions after selection
   };
 

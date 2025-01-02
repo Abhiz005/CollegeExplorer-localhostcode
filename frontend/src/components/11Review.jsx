@@ -15,7 +15,7 @@ const reviews = [
   {
     name: "Krish",
     description:
-      "The college is good, and all the faculty are also very good.Placements: There are no placements given in SIES College. Placement Sales are not active; actually, there is no placement cell in SIES College. There is no top recruitment company at SIES College. No student has an internship at SIES College.Infrastructure: There is no classroom for M.Sc. students in the college. The library has a very good structure. The department is also very good, and the teachers are very helpful. The college structure is also very well-developed, and cleaning is also very good in college. The canteen food is also good.Faculty: Teachers are very helpful in college and are well-qualified and knowledgeable. Teaching quality is also very good. It makes students industry-ready. Semester exams are very good, and they are average, according to students. The passing rate is 40% in the college.",
+      "The college is good, and all the faculty are also very good. Placements: There are no placements given in SIES College. Placement Sales are not active; actually, there is no placement cell in SIES College. There is no top recruitment company at SIES College. No student has an internship at SIES College. Infrastructure: There is no classroom for M.Sc. students in the college. The library has a very good structure. The department is also very good, and the teachers are very helpful. The college structure is also very well-developed, and cleaning is also very good in college. The canteen food is also good. Faculty: Teachers are very helpful in college and are well-qualified and knowledgeable. Teaching quality is also very good. It makes students industry-ready. Semester exams are very good, and they are average, according to students. The passing rate is 40% in the college.",
     img: "/images/avatar-2.png",
   },
   {
@@ -46,7 +46,10 @@ const Review = () => {
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={20}
           slidesPerView={3}
-          navigation
+          navigation={{
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
+          }}
           pagination={{ clickable: true }}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           breakpoints={{
@@ -87,6 +90,8 @@ const Review = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <div className="swiper-button-prev"></div>
+        <div className="swiper-button-next"></div>
       </section>
     </div>
   );

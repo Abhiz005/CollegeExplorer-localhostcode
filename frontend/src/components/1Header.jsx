@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAuthStore } from "../components/store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
   const { isAuthenticated, logout } = useAuthStore();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -14,13 +16,25 @@ const Header = () => {
   const handleLogout = () => {
     logout(); // Perform logout action
   };
-
+  const handleDashBoardRedirect = () => {
+    navigate("/dashboardPage"); // Redirect to login page
+  };
   const handleLoginRedirect = () => {
-    window.location.href = "/login"; // Redirect to login page
+    navigate("/login"); // Redirect to login page
+  };
+
+  const handleNavigateToSection = (sectionId) => {
+    navigate(`/#${sectionId}`); // Navigate to the root with the section hash
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the section
+      }
+    }, 100); // Delay ensures page navigation before scrolling
   };
 
   useEffect(() => {
-    // This effect ensures that if the user is logged out, the menu will reflect the "Login" button
+    // Ensure the active link highlights correctly based on the current path
   }, [isAuthenticated]);
 
   return (
@@ -46,44 +60,101 @@ const Header = () => {
       <div className={`navbar1 ${menuOpen ? "show" : ""}`}>
         <ul className="menu">
           <li>
-            <a
-              href="#"
-              className={activeLink === "Home" ? "active" : ""}
-              onClick={() => setActiveLink("Home")}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
             >
-              Home
-            </a>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`m-c ${activeLink === "Home" ? "active" : ""}`}
+                onClick={() => {
+                  setActiveLink("Home");
+                  handleNavigateToSection("Home");
+                }}
+              >
+                Home
+              </motion.button>
+            </motion.div>
           </li>
           <li>
-            <a href="/dashboardPage">DashBoard</a>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`m-c ${activeLink === "DashBoard" ? "active" : ""}`}
+                onClick={() => {
+                  setActiveLink("DashBoard"); // Set active link for DashBoard
+                  handleDashBoardRedirect();
+                }}
+              >
+                DashBoard
+              </motion.button>
+            </motion.div>
           </li>
           <li>
-            <a
-              href="#review"
-              className={activeLink === "Review" ? "active" : ""}
-              onClick={() => setActiveLink("Review")}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
             >
-              Review
-            </a>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`m-c ${activeLink === "Review" ? "active" : ""}`}
+                onClick={() => {
+                  setActiveLink("Review"); // Set active link for Review
+                  handleNavigateToSection("review");
+                }}
+              >
+                Review
+              </motion.button>
+            </motion.div>
           </li>
           <li>
-            <a
-              href="#map"
-              className={activeLink === "Map" ? "active" : ""}
-              onClick={() => setActiveLink("Map")}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
             >
-              Map
-            </a>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`m-c ${activeLink === "Map" ? "active" : ""}`}
+                onClick={() => {
+                  setActiveLink("Map"); // Set active link for Map
+                  handleNavigateToSection("map");
+                }}
+              >
+                Map
+              </motion.button>
+            </motion.div>
           </li>
           <li>
-            <a
-              href="#feedback"
-              className={activeLink === "FeedBack" ? "active" : ""}
-              onClick={() => setActiveLink("FeedBack")}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
             >
-              FeedBack
-            </a>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`m-c ${activeLink === "FeedBack" ? "active" : ""}`}
+                onClick={() => {
+                  setActiveLink("FeedBack"); // Set active link for FeedBack
+                  handleNavigateToSection("feedback");
+                }}
+              >
+                FeedBack
+              </motion.button>
+            </motion.div>
           </li>
+
           <li>
             {isAuthenticated ? (
               <motion.div

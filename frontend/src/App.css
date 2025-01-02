@@ -7,10 +7,6 @@
   box-sizing: border-box;
   text-decoration: none;
 }
-/* .App {
-  text-align: center;
-  height: 100vh;
-} */
 /* ////////////////////////////////Header CSS/////////////////////////////// */
 .header {
   background: linear-gradient(
@@ -336,23 +332,6 @@ ul li {
 .fee-years p {
   margin: 5px 0;
 }
-
-@media (min-width: 768px) {
-  .content {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .location {
-    width: 40%;
-  }
-
-  .fee-section {
-    width: 50%;
-  }
-}
-@media screen and (max-width: 420px) {
-}
 /* /////////////////////////////////////////// SearchIcon CSS /////////////////////////////////////// */
 .search-container {
   margin: -41px 45px 0px 0px;
@@ -429,7 +408,7 @@ ul li {
   padding: 2.5rem 0;
 }
 
-/*//////////////////////////////////line css///////////////////////////////////////////////*/
+/*//////////////////////////////////Side line in carosal css///////////////////////////////////////////////*/
 .two-lines {
   position: absolute;
   height: 85vh; /* Adjust height as needed */
@@ -470,7 +449,6 @@ ul li {
   border: 2px solid rgba(255, 255, 255, 0.671); /* White border */
   background-color: transparent; /* No fill */
 }
-/* Color-changing text animation */
 /* Color-changing text animation */
 .colorful-text {
   display: block;
@@ -584,7 +562,6 @@ ul li {
   animation: appear 0.6s linear;
 }
 /*/////////////////////////////////////////Like.css /////////////////////////////////////////*/
-/* like.css */
 .like-container {
   display: flex;
   align-items: center;
@@ -616,99 +593,7 @@ ul li {
 
 /* ////////////////////////////////Review CSS ////////////////////////////////////////////// */
 
-.review-header {
-  background-image: url("assets/bg.png");
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
-  display: flex;
-}
-
-.review-container {
-  max-width: 1400px;
-  margin: 0px 0px 0px 30px;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10rem;
-}
-
-.review-container__left h1 {
-  margin-bottom: 2rem;
-  font-size: 2.5rem;
-  font-weight: 500;
-  color: var(--primary-color);
-}
-
-.review-container__left p {
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-}
-
-.review-container__left button {
-  padding: 1rem 2rem;
-  margin-top: 1rem;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  background: linear-gradient(
-    to right,
-    var(--primary-color),
-    var(--primary-color-dark)
-  );
-  color: var(--white);
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.review-container__right {
-  display: grid;
-  gap: 2rem;
-}
-
-.card {
-  padding: 2rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  background-color: rgba(69, 65, 65, 0.2); /* Semi-transparent background */
-  border-radius: 1rem;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  backdrop-filter: blur(10px); /* Blur effect */
-  -webkit-backdrop-filter: blur(10px); /* For Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Optional border for definition */
-}
-
-.card img {
-  max-width: 75px;
-  border-radius: 100%;
-}
-
-.card__content {
-  display: flex;
-  gap: 1rem;
-}
-
-.card__content span i {
-  font-size: 2rem;
-  color: var(--primary-color);
-}
-
-.card__details p {
-  font-style: italic;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-}
-
-.card__details h4 {
-  text-align: right;
-  color: var(--primary-color);
-  font-size: 1rem;
-  font-weight: 500;
-}
-/* ///////////////////////////////////// line CSS ////////////////////////////////////////////////// */
+/* ///////////////////////////////////// Seaction line CSS ////////////////////////////////////////////////// */
 .line-container {
   margin-top: 100px;
   display: flex;
@@ -757,10 +642,8 @@ ul li {
   border-top-left-radius: 6px; /* Radius for the opposite bend */
 }
 
-/* //////////////////////////////////////////////////line Css end /////////////////////////////// */
-/* //////////////////////////////////////////////////Like CSS /////////////////////////////// */
-/* components/LikeButton.css */
-/* components/LikeButton.css */
+/* //////////////////////////////////////////////////LikeButton CSS /////////////////////////////// */
+
 .likeIcon {
   position: absolute;
   height: 50px;
@@ -830,7 +713,6 @@ ul li {
   animation-range: entry 0 cover 40%;
 }
 /* //////////////////////////////////////////////////FeedBack CSS /////////////////////////////// */
-/* Basic container styling */
 .feedback-container {
   color: #fff;
   margin: 0 auto;
@@ -954,23 +836,6 @@ ul li {
   outline: none;
 }
 
-/* Responsive styling */
-@media (max-width: 600px) {
-  .feedback-container {
-    padding: 15px;
-  }
-
-  .feedback-form input,
-  .feedback-form textarea {
-    font-size: 12px;
-  }
-
-  .feedback-button {
-    font-size: 14px;
-    margin: 0px 40px;
-  }
-}
-
 /* //////////////////////////////////////////////////Footer CSS /////////////////////////////// */
 footer {
   text-align: center;
@@ -1022,213 +887,6 @@ footer {
   background-color: #4ade80; /* Tailwind green-400 */
 }
 
-/* /////////////////////////////////////Mobile View /////////////////////////////////////////// */
-@media (min-width: 320px) and (max-width: 480px) {
-  .header {
-    height: 3.2em;
-  }
-  .logo-name {
-    font-size: 25px;
-    margin-left: -10px;
-  }
-  .menu {
-    margin-top: 7px;
-    border-radius: 1% 0% 1% 20%;
-  }
-
-  .dynamic-island {
-    top: 64px;
-    width: 58%;
-    text-align: center;
-  }
-  .embla {
-    max-width: 100%;
-    margin-top: 50px;
-    --slide-height: 22rem;
-    --slide-spacing: -4rem;
-    --slide-size: 80%;
-  }
-  .embla__button {
-    width: 3rem;
-    height: 3.6rem;
-  }
-
-  .likeIcon {
-    height: 40px;
-    margin-left: 50px;
-    margin-top: -40px;
-  }
-
-  .like-icon {
-    font-size: 20px; /* Size of the like icon */
-  }
-
-  .like-count {
-    position: absolute;
-    top: -40px; /* Adjust position as needed */
-    left: 72px; /* Adjust position as needed */
-    font-size: 12px; /* Size of the count */
-  }
-
-  .like-popup {
-    top: 2px; /* Adjust position as needed */
-    left: 45px; /* Adjust position as needed */
-    font-size: 16px; /* Size of the popup text */
-  }
-
-  .infobox {
-    width: 90%;
-    margin: 25px auto 0px auto;
-  }
-  .search-container {
-    margin: 10px 20px 0px 0px;
-  }
-  .search-container.expanded .search-input {
-    width: 300px;
-    margin-right: 5px;
-  }
-  .two-lines {
-    height: 50vh; /* Adjust height as needed */
-    padding: 60px 10px 0px 10px;
-  }
-  .line {
-    width: 2px; /* Adjust line width as needed */
-  }
-
-  .line::before {
-    top: -9px;
-    width: 5px; /* Square size */
-    height: 5px;
-  }
-
-  .line::after {
-    bottom: -10px;
-    width: 5px; /* Diamond size */
-    height: 5px;
-  }
-
-  .starburst {
-    width: 45px; /* Adjust to control the size */
-    margin: 60px 0px 0px 50px;
-  }
-
-  .line-container {
-    margin-top: 40px;
-  }
-  .Map-container {
-    width: 90%;
-    border: 3px solid green;
-    padding: 5px;
-  }
-  .review-container {
-    max-width: 1400px;
-    margin: 0px 10px 0px 10px;
-  }
-  #topline {
-    margin: -50px 0px 0px 35px;
-  }
-}
-
-@media (min-width: 480px) and (max-width: 1000px) {
-  .embla {
-    max-width: 100%;
-    margin-top: 50px;
-    --slide-height: 22rem;
-    --slide-spacing: -11rem;
-    --slide-size: 80%;
-  }
-  .embla__button {
-    width: 4rem;
-  }
-
-  .likeIcon {
-    height: 40px;
-    margin-left: 120px;
-    margin-top: -40px;
-  }
-
-  .like-count {
-    top: -40px; /* Adjust position as needed */
-    left: 142px; /* Adjust position as needed */
-  }
-
-  .like-popup {
-    top: 2px; /* Adjust position as needed */
-    left: 115px; /* Adjust position as needed */
-  }
-
-  .infobox {
-    width: 90%;
-    margin: 25px auto 0px auto;
-  }
-  .search-container {
-    margin: 10px 20px 0px 0px;
-  }
-  .search-container.expanded .search-input {
-    width: 300px;
-    margin-right: 5px;
-  }
-  .two-lines {
-    height: 20vh; /* Adjust height as needed */
-    padding: 60px 50px 0px 50px;
-  }
-  .line {
-    width: 2px; /* Adjust line width as needed */
-  }
-
-  .line::before {
-    top: -9px;
-    width: 5px; /* Square size */
-    height: 5px;
-  }
-
-  .line::after {
-    bottom: -10px;
-    width: 5px; /* Diamond size */
-    height: 5px;
-  }
-
-  .starburst {
-    width: 45px; /* Adjust to control the size */
-    margin: 60px 0px 0px 50px;
-  }
-
-  .line-container {
-    margin-top: 40px;
-  }
-  .Map-container {
-    width: 90%;
-    border: 3px solid green;
-    padding: 5px;
-  }
-  .review-container {
-    max-width: 1400px;
-    margin: 0px 10px 0px 10px;
-  }
-  #topline {
-    margin: -50px 0px 0px 35px;
-  }
-}
-@media (width < 900px) {
-  .review-container {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .review-container__right {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width < 750px) {
-  .review-container__right {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-@media (width < 1200px) {
-  .review-container {
-    gap: 3rem;
-  }
-}
 /*///////////////////////////// SignUpPage css /////////////////////////////////*/
 /* Container for the entire sign-up form */
 .sign-up-container {
@@ -1533,6 +1191,9 @@ footer {
   transition: background-color 0.2s ease;
   cursor: pointer;
   border: none;
+  text-transform: uppercase;
+  font-size: 17px;
+  font-family: sans-serif;
 }
 
 .login-button:hover {
@@ -1542,6 +1203,35 @@ footer {
 .login-button:disabled {
   background: #cbd5e0; /* gray-300 */
   cursor: not-allowed;
+}
+.m-c {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to right, #48bb78, #2d9e66);
+  color: white;
+  font-weight: bold;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border: none;
+
+  background: none;
+  text-transform: uppercase;
+  font-size: 17px;
+  font-family: sans-serif;
+}
+
+.m-c:hover {
+  background: linear-gradient(to right, #387ea1, #2d4d9e); /* Hover state */
+}
+
+.m-c:disabled {
+  background: #cbd5e0; /* gray-300 */
+  cursor: not-allowed;
+}
+.m-c.active {
+  background: linear-gradient(to right, #387ea1, #2d4d9e); /* Active state */
 }
 
 .loader {
@@ -1603,7 +1293,7 @@ footer {
 }
 /* General container for the dashboard */
 .dashboard-container {
-  max-width: fit-content; /* 512px */
+  max-width: 50%; /* 512px */
   width: 100%;
   margin-top: 2.5rem; /* 10px */
   padding: 2rem; /* 8px */
@@ -1944,7 +1634,8 @@ footer {
 }
 
 .swiper-wrapper {
-  overflow: visible; /* Ensure Swiper container doesn't clip hover effects */
+  overflow: visible;
+  margin-bottom: 0.3rem; /* Ensure Swiper container doesn't clip hover effects */
 }
 
 /* Responsive Design */
@@ -1972,5 +1663,245 @@ footer {
   to {
     opacity: 1;
     scale: 1;
+  }
+}
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .location {
+    width: 40%;
+  }
+
+  .fee-section {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 420px) {
+}
+
+/* /////////////////////////////////////Mobile View /////////////////////////////////////////// */
+@media (min-width: 320px) and (max-width: 480px) {
+  .header {
+    height: 3.2em;
+  }
+  .logo-name {
+    font-size: 25px;
+    margin-left: -10px;
+  }
+  .menu {
+    margin-top: 7px;
+    border-radius: 1% 0% 1% 20%;
+  }
+
+  .dynamic-island {
+    top: 64px;
+    width: 58%;
+    text-align: center;
+  }
+  .embla {
+    max-width: 100%;
+    margin-top: 50px;
+    --slide-height: 22rem;
+    --slide-spacing: -4rem;
+    --slide-size: 80%;
+  }
+  .embla__button {
+    width: 3rem;
+    height: 3.6rem;
+  }
+
+  .likeIcon {
+    height: 40px;
+    margin-left: 50px;
+    margin-top: -40px;
+  }
+
+  .like-icon {
+    font-size: 20px; /* Size of the like icon */
+  }
+
+  .like-count {
+    position: absolute;
+    top: -40px; /* Adjust position as needed */
+    left: 72px; /* Adjust position as needed */
+    font-size: 12px; /* Size of the count */
+  }
+
+  .like-popup {
+    top: 2px; /* Adjust position as needed */
+    left: 45px; /* Adjust position as needed */
+    font-size: 16px; /* Size of the popup text */
+  }
+
+  .infobox {
+    width: 90%;
+    margin: 25px auto 0px auto;
+  }
+  .search-container {
+    margin: 10px 20px 0px 0px;
+  }
+  .search-container.expanded .search-input {
+    width: 300px;
+    margin-right: 5px;
+  }
+  .two-lines {
+    height: 50vh; /* Adjust height as needed */
+    padding: 60px 10px 0px 10px;
+  }
+  .line {
+    width: 2px; /* Adjust line width as needed */
+  }
+
+  .line::before {
+    top: -9px;
+    width: 5px; /* Square size */
+    height: 5px;
+  }
+
+  .line::after {
+    bottom: -10px;
+    width: 5px; /* Diamond size */
+    height: 5px;
+  }
+
+  .starburst {
+    width: 45px; /* Adjust to control the size */
+    margin: 60px 0px 0px 50px;
+  }
+
+  .line-container {
+    margin-top: 40px;
+  }
+  .Map-container {
+    width: 90%;
+    border: 3px solid green;
+    padding: 5px;
+  }
+  .review-container {
+    max-width: 1400px;
+    margin: 0px 10px 0px 10px;
+  }
+  #topline {
+    margin: -50px 0px 0px 35px;
+  }
+  .feedback-container {
+    padding: 15px;
+  }
+
+  .feedback-form input,
+  .feedback-form textarea {
+    font-size: 12px;
+  }
+
+  .feedback-button {
+    font-size: 14px;
+    margin: 0px 40px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 1000px) {
+  .embla {
+    max-width: 100%;
+    margin-top: 50px;
+    --slide-height: 22rem;
+    --slide-spacing: -11rem;
+    --slide-size: 80%;
+  }
+  .embla__button {
+    width: 4rem;
+  }
+
+  .likeIcon {
+    height: 40px;
+    margin-left: 120px;
+    margin-top: -40px;
+  }
+
+  .like-count {
+    top: -40px; /* Adjust position as needed */
+    left: 142px; /* Adjust position as needed */
+  }
+
+  .like-popup {
+    top: 2px; /* Adjust position as needed */
+    left: 115px; /* Adjust position as needed */
+  }
+
+  .infobox {
+    width: 90%;
+    margin: 25px auto 0px auto;
+  }
+  .search-container {
+    margin: 10px 20px 0px 0px;
+  }
+  .search-container.expanded .search-input {
+    width: 300px;
+    margin-right: 5px;
+  }
+  .two-lines {
+    height: 20vh; /* Adjust height as needed */
+    padding: 60px 50px 0px 50px;
+  }
+  .line {
+    width: 2px; /* Adjust line width as needed */
+  }
+
+  .line::before {
+    top: -9px;
+    width: 5px; /* Square size */
+    height: 5px;
+  }
+
+  .line::after {
+    bottom: -10px;
+    width: 5px; /* Diamond size */
+    height: 5px;
+  }
+
+  .starburst {
+    width: 45px; /* Adjust to control the size */
+    margin: 60px 0px 0px 50px;
+  }
+
+  .line-container {
+    margin-top: 40px;
+  }
+  .Map-container {
+    width: 90%;
+    border: 3px solid green;
+    padding: 5px;
+  }
+  .review-container {
+    max-width: 1400px;
+    margin: 0px 10px 0px 10px;
+  }
+  #topline {
+    margin: -50px 0px 0px 35px;
+  }
+}
+@media (width < 900px) {
+  .review-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .review-container__right {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-container {
+    max-width: 80%;
+  }
+}
+
+@media (width < 750px) {
+  .review-container__right {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (width < 1200px) {
+  .review-container {
+    gap: 3rem;
   }
 }

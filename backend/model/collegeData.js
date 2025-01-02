@@ -26,10 +26,6 @@ const collegeSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  fees: {
-    type: [String], // Array of strings to store different fee values
-    required: true,
-  },
   number: {
     type: [String], // Array of strings to store phone numbers
     default: [],

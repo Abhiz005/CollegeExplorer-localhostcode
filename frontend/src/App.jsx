@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
@@ -59,63 +59,71 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
 
+  // Fetch colleges data and memoize sorting logic
+  const fetchColleges = useCallback(async () => {
+    try {
+      const res = await axios.get("http://localhost:4001/college");
+      const sortedData = res.data.sort((a, b) => {
+        const aNumber = parseInt(a.number[0], 10) || 0;
+        const bNumber = parseInt(b.number[0], 10) || 0;
+        return aNumber - bNumber;
+      });
+      setCollegeData(sortedData);
+      setFilteredColleges(sortedData);
+    } catch (error) {
+      console.error("Error fetching college data:", error);
+    }
+  }, []);
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
   useEffect(() => {
-    const fetchColleges = async () => {
-      try {
-        const res = await axios.get("http://localhost:4001/college");
-        const sortedData = res.data.sort((a, b) => {
+    fetchColleges();
+  }, [fetchColleges]);
+
+  // Handle search with debouncing
+  const handleSearch = useCallback(
+    (query) => {
+      setSearchQuery(query);
+
+      if (!query.trim()) {
+        setFilteredColleges(collegeData);
+        setSelectedCourse(null);
+        setCurrentIndex(0);
+        return;
+      }
+
+      const results = collegeData
+        .filter((college) =>
+          Object.keys(college.courses).some((course) =>
+            course.toLowerCase().includes(query.toLowerCase())
+          )
+        )
+
+        .sort((a, b) => {
           const aNumber = parseInt(a.number[0], 10) || 0;
           const bNumber = parseInt(b.number[0], 10) || 0;
           return aNumber - bNumber;
         });
-        setCollegeData(sortedData);
-        setFilteredColleges(sortedData);
-      } catch (error) {
-        console.error("Error fetching college data:", error);
-      }
-    };
-    fetchColleges();
-  }, []);
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
+      const courseMatch = collegeData
+        .flatMap((college) =>
+          Object.keys(college.courses).filter((course) =>
+            course.toLowerCase().includes(query.toLowerCase())
+          )
+        )
+        .find((course) => course.toLowerCase().includes(query.toLowerCase()));
 
-    if (!query.trim()) {
-      setFilteredColleges(collegeData);
-      setSelectedCourse(null);
+      setFilteredColleges(results);
+      setSelectedCourse(courseMatch || null);
       setCurrentIndex(0);
-      return;
-    }
+    },
+    [collegeData]
+  );
 
-    const results = collegeData
-      .filter((college) =>
-        Object.keys(college.courses).some((course) =>
-          course.toLowerCase().includes(query.toLowerCase())
-        )
-      )
-      .sort((a, b) => {
-        const aNumber = parseInt(a.number[0], 10) || 0;
-        const bNumber = parseInt(b.number[0], 10) || 0;
-        return aNumber - bNumber;
-      });
-
-    const courseMatch = collegeData
-      .flatMap((college) =>
-        Object.keys(college.courses).filter((course) =>
-          course.toLowerCase().includes(query.toLowerCase())
-        )
-      )
-      .find((course) => course.toLowerCase().includes(query.toLowerCase()));
-
-    setFilteredColleges(results);
-    setSelectedCourse(courseMatch || null);
-    setCurrentIndex(0);
-  };
-
+  // Increment like count and update backend
   const incrementLikeCount = async () => {
     const currentCollege = filteredColleges[currentIndex];
     if (!currentCollege) return;
