@@ -1,39 +1,44 @@
 import React, { useState } from "react";
-import { toast } from "react-hot-toast"; // Import toast
-import { useAuthStore } from "./store/authStore"; // Import the auth store
+import { toast } from "react-hot-toast";
+import { useAuthStore } from "./store/authStore";
 
 const LikeButton = ({ likeCount, onLike }) => {
-  const [liked, setLiked] = useState(false);
+  const [isLiking, setIsLiking] = useState(false); // Track if a like is in progress
   const { isAuthenticated } = useAuthStore(); // Get login status from the auth store
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
     if (!isAuthenticated) {
-      // Show toast notification if not logged in
       toast.error("Please log in to use this feature.");
       return;
     }
 
-    setLiked(true);
-    onLike();
+    if (isLiking) return; // Prevent multiple clicks
+    setIsLiking(true);
 
-    // Show success toast for like action
-    toast.success("You liked this!");
-    setTimeout(() => {
-      setLiked(false);
-    }, 1000);
+    try {
+      await onLike(); // Call the parent's like function
+      toast.success("You liked this!");
+    } catch (error) {
+      toast.error("Failed to like. Please try again.");
+    } finally {
+      setIsLiking(false);
+    }
   };
 
   return (
     <div className="like-button">
-      <button onClick={handleLikeClick} className="like-icon">
+      <button
+        onClick={handleLikeClick}
+        className="like-icon"
+        disabled={isLiking}
+      >
         <img
           src="./images/likeIcon.png"
-          className={`likeIcon ${liked ? "liked" : ""}`}
+          className={`likeIcon ${isLiking ? "liked" : ""}`}
           alt="like icon"
         />
       </button>
       {likeCount > 0 && <span className="like-count">{likeCount}</span>}
-      {liked && <div className="like-popup">Liked!</div>}
     </div>
   );
 };

@@ -44,8 +44,10 @@ export const sendWelcomeEmail = async (email, name) => {
       from: `"College Explorer" <${process.env.GMAIL_EMAIL}>`,
       to: email,
       subject: "Welcome to College Explorer",
-      html: WELCOME_EMAIL_TEMPLATE.replace("{userName}", name)
-      .replace("{dashboardURL}", "https://yourwebsite.com/dashboard"),
+      html: WELCOME_EMAIL_TEMPLATE.replace("{userName}", name).replace(
+        "{dashboardURL}",
+        "https://yourwebsite.com/dashboard"
+      ),
     };
 
     const info = await transporter.sendMail(mailOptions);
@@ -87,5 +89,31 @@ export const sendResetSuccessEmail = async (email) => {
   } catch (error) {
     console.error("Error sending password reset success email:", error);
     throw new Error("Could not send password reset success email");
+  }
+};
+/////
+export const sendFeedbackEmail = async (feedbackData) => {
+  const { name, collegeName, note, email } = feedbackData;
+
+  const mailOptions = {
+    from: `"College Explorer" <${process.env.GMAIL_EMAIL}>`, // Your Gmail email
+    to: "neon37012@gmail.com", // Your email to receive the feedback
+    replyTo: email, // This allows replies to go to the user's email address
+    subject: `Feedback from ${name} (${collegeName})`,
+    html: `
+      <h3>Feedback Received</h3>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>College Name:</strong> ${collegeName}</p>
+      <p><strong>Note:</strong> ${note}</p>
+      <p><strong>Email:</strong> ${email}</p>
+    `,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Feedback email sent:", info.response);
+  } catch (error) {
+    console.error("Error sending feedback email:", error);
+    throw new Error("Could not send feedback email");
   }
 };

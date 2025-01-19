@@ -95,26 +95,18 @@ function App() {
         return;
       }
 
-      const results = collegeData
-        .filter((college) =>
-          Object.keys(college.courses).some((course) =>
+      const results = collegeData.filter((college) =>
+        Object.keys(college.courses).some((course) =>
+          course.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+
+      // Find the first matching course for the query
+      const courseMatch = results.length
+        ? Object.keys(results[0].courses).find((course) =>
             course.toLowerCase().includes(query.toLowerCase())
           )
-        )
-
-        .sort((a, b) => {
-          const aNumber = parseInt(a.number[0], 10) || 0;
-          const bNumber = parseInt(b.number[0], 10) || 0;
-          return aNumber - bNumber;
-        });
-
-      const courseMatch = collegeData
-        .flatMap((college) =>
-          Object.keys(college.courses).filter((course) =>
-            course.toLowerCase().includes(query.toLowerCase())
-          )
-        )
-        .find((course) => course.toLowerCase().includes(query.toLowerCase()));
+        : null;
 
       setFilteredColleges(results);
       setSelectedCourse(courseMatch || null);
@@ -128,21 +120,29 @@ function App() {
     const currentCollege = filteredColleges[currentIndex];
     if (!currentCollege) return;
 
-    const updatedCollege = {
-      ...currentCollege,
-      likeCount: currentCollege.likeCount + 1,
-    };
+    const isCourseLike =
+      selectedCourse && currentCollege.courses[selectedCourse];
+
+    const payload = isCourseLike
+      ? { courseName: selectedCourse }
+      : { likeCount: currentCollege.likeCount + 1 };
 
     try {
-      await axios.put(`http://localhost:4001/college/${currentCollege._id}`, {
-        likeCount: updatedCollege.likeCount,
-      });
+      const response = await axios.put(
+        `http://localhost:4001/college/${currentCollege._id}`,
+        payload
+      );
 
-      const updatedColleges = [...filteredColleges];
-      updatedColleges[currentIndex] = updatedCollege;
+      const updatedCollege = response.data;
+
+      // Optimistically update filteredColleges
+      const updatedColleges = filteredColleges.map((college) =>
+        college._id === updatedCollege._id ? updatedCollege : college
+      );
       setFilteredColleges(updatedColleges);
     } catch (error) {
       console.error("Error updating like count:", error);
+      toast.error("Failed to update like count.");
     }
   };
 
@@ -183,7 +183,9 @@ function App() {
                   />
                   <LikeButton
                     likeCount={
-                      courseDetails.likeCount || currentCollege.likeCount || 0
+                      selectedCourse
+                        ? courseDetails?.likeCountCourse || 0
+                        : currentCollege.likeCount || 0
                     }
                     onLike={incrementLikeCount}
                   />
@@ -192,7 +194,7 @@ function App() {
                     location={currentCollege.location || "N/A"}
                     fees={
                       courseDetails.fees ||
-                      currentCollege.fees || ["Not Available"]
+                      currentCollege.fees || ["Search Courses"]
                     }
                   />
                   <Review />

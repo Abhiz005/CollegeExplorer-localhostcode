@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import collegeRoute from "./route/college.route.js";
+import feedbackRoutes from "./route/college.route.js";
+
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -32,7 +34,7 @@ app.use("/college", collegeRoute);
 ////
 app.use("/api/auth", authRoutes);
 ///
-
+app.use("/feedback", feedbackRoutes);
 app.listen(PORT, () => {
   console.log(`Server app listening on port ${PORT}`);
 });

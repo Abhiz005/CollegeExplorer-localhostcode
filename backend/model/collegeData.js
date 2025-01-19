@@ -8,7 +8,7 @@ const courseSchema = mongoose.Schema({
     type: [String], // Array of strings to store different fee values for the course
     //required: true,
   },
-  likeCount: {
+  likeCountCourse: {
     type: Number,
     default: 0,
   },

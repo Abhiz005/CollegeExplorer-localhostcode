@@ -35,15 +35,19 @@
 }
 @font-face {
   font-family: "Exima"; /* Name of the font */
-  src: url("/fonts/Exima Geometric.otf") format("opentype"); /* Path to the font file */
+  src: url("/fonts/abnes.otf") format("opentype"); /* Path to the font file */
   font-weight: normal; /* Adjust if needed */
   font-style: normal; /* Adjust if needed */
 }
 
 .logo-name {
+  display: flex;
   text-align: center;
-  font-size: 26px;
+  font-size: 33px;
   font-family: "Exima", Garamond, sans-serif; /* Fallback to Garamond and sans-serif */
+  align-items: center;
+  margin-bottom: -7px;
+  font-weight: bold;
 }
 
 .navbar {
@@ -1905,3 +1909,4 @@ footer {
     gap: 3rem;
   }
 }
+/* MAP*/
