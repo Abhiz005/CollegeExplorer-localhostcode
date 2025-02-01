@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const courseSchema = mongoose.Schema({
   number: {
     type: [String], // Array of strings to store course-specific ranks or identifiers
-    //required: true,
+  
   },
   fees: {
     type: [String], // Array of strings to store different fee values for the course

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const DynamicIsland = () => {
   const [message, setMessage] = useState(
-    "FOR THE LATEST FEES AND SAVINGS TOOLS, PLEASE LOGIN"
+    "FOR THE LIKE AND SAVINGS TOOLS, PLEASE LOGIN"
   );
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const DynamicIsland = () => {
       if (window.innerWidth <= 420) {
         setMessage("FOR LATEST FEE PLEASE LOGIN");
       } else {
-        setMessage("FOR THE LATEST FEES AND SAVINGS TOOLS, PLEASE LOGIN");
+        setMessage("FOR THE LIKE AND SAVINGS TOOLS, PLEASE LOGIN!!!");
       }
     };
 
@@ -38,9 +38,9 @@ const DynamicIsland = () => {
   }, []);
 
   return (
-    <div className="pop">
+    <div className="pop ">
       <div id="dynamicIsland" className="dynamic-island">
-        {message}
+        <div className="colorful-text">{message}</div>
       </div>
     </div>
   );

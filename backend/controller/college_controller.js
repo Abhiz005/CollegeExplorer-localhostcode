@@ -1,6 +1,7 @@
 import collegeData from "../model/collegeData.js";
 import { sendFeedbackEmail } from "../mailtrap/email.js";
 import Review from "../model/review_model.js";
+import College from "../model/collegeData.js";
 
 // Controller function for getting all colleges
 export const getcollege = async (req, res) => {
@@ -30,50 +31,58 @@ export const searchColleges = async (req, res) => {
 };
 
 // Controller function for updating the like count
-// Controller function for updating the like count
 export const updateLikeCount = async (req, res) => {
   const { id } = req.params; // College ID
-  const { courseName } = req.body; // Course name (optional)
+  const { likeCount, courseName } = req.body; // Like count and course name (if course-specific)
 
   try {
-    const college = await collegeData.findById(id);
+    // Find the college by ID
+    const college = await College.findById(id);
     if (!college) {
       return res.status(404).json({ message: "College not found" });
     }
 
     if (courseName) {
-      // Check if the courses field exists and contains the course
-      if (!college.courses) {
-        college.courses = {}; // Initialize if not present
+      // Update like count for a specific course
+      const course = college.courses.get(courseName); // Get the course from the Map
+      if (!course) {
+        return res.status(400).json({ message: "Course not found" });
       }
 
-      if (!college.courses[courseName]) {
-        // Optionally create a new course entry
-        college.courses[courseName] = { likeCountCourse: 0 };
-      }
+      // Update the course's like count
+      course.likeCountCourse = likeCount;
 
-      // Increment course like count
-      college.courses[courseName].likeCountCourse += 1;
+      // Save the updated college
+      await college.save();
     } else {
-      // Increment college like count
-      college.likeCount = (college.likeCount || 0) + 1;
+      // Update the general like count
+      college.likeCount = likeCount;
+
+      // Save the updated college
+      await college.save();
     }
 
-    const updatedCollege = await college.save(); // Save changes
-    res.status(200).json(updatedCollege); // Return updated data
+    // Return the updated college data
+    return res.status(200).json(college);
   } catch (error) {
-    console.error("Error updating like count:", error);
-    res.status(500).json({ message: "An error occurred", error });
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while updating like count", error });
   }
 };
-
+// Get all reviews from MongoDB
 // Get all reviews from MongoDB
 export const getReviews = async (req, res) => {
   try {
-    const reviews = await Review.find();
-    res.status(200).json(reviews);
+    const reviews = await Review.find({
+      course_id: { $exists: true }, // Check if the course_id field exists
+    });
+    res.status(200).json(reviews); // Send successful response
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch reviews", error });
+    res
+      .status(500)
+      .json({ message: "Failed to fetch reviews", error: error.message });
   }
 };
 
@@ -114,4 +123,3 @@ export const sendFeedback = async (req, res) => {
     });
   }
 };
-

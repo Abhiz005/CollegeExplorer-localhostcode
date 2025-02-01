@@ -4,7 +4,7 @@ import { useAuthStore } from "./store/authStore";
 
 const LikeButton = ({ likeCount, onLike }) => {
   const [isLiking, setIsLiking] = useState(false); // Track if a like is in progress
-  const { isAuthenticated } = useAuthStore(); // Get login status from the auth store
+  const { isAuthenticated } = useAuthStore();
 
   const handleLikeClick = async () => {
     if (!isAuthenticated) {

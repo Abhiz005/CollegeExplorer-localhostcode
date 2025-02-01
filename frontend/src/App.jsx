@@ -90,14 +90,15 @@ function App() {
 
       if (!query.trim()) {
         setFilteredColleges(collegeData);
+
         setSelectedCourse(null);
         setCurrentIndex(0);
         return;
       }
 
       const results = collegeData.filter((college) =>
-        Object.keys(college.courses).some((course) =>
-          course.toLowerCase().includes(query.toLowerCase())
+        Object.keys(college.courses).some(
+          (course) => course.toLowerCase() === query.toLowerCase() // Exact match
         )
       );
 
@@ -116,15 +117,21 @@ function App() {
   );
 
   // Increment like count and update backend
+  // Increment like count and update backend
   const incrementLikeCount = async () => {
     const currentCollege = filteredColleges[currentIndex];
     if (!currentCollege) return;
 
+    // Check if we have selected a course
     const isCourseLike =
       selectedCourse && currentCollege.courses[selectedCourse];
 
+    // Prepare the payload based on whether it's a course or general like count
     const payload = isCourseLike
-      ? { courseName: selectedCourse }
+      ? {
+          courseName: selectedCourse,
+          likeCount: currentCollege.courses[selectedCourse].likeCountCourse + 1,
+        }
       : { likeCount: currentCollege.likeCount + 1 };
 
     try {
@@ -135,7 +142,7 @@ function App() {
 
       const updatedCollege = response.data;
 
-      // Optimistically update filteredColleges
+      // Optimistically update filteredColleges with the new like count
       const updatedColleges = filteredColleges.map((college) =>
         college._id === updatedCollege._id ? updatedCollege : college
       );
@@ -152,7 +159,8 @@ function App() {
   const courseDetails = selectedCourse
     ? currentCollege.courses?.[selectedCourse] || {}
     : {};
-
+  // console.log("selected course:", selectedCourse);
+  // console.log("currentCollege.name:", currentCollege.name);
   return (
     <div>
       <Routes>
@@ -197,7 +205,11 @@ function App() {
                       currentCollege.fees || ["Search Courses"]
                     }
                   />
-                  <Review />
+                  <Review
+                    selectedCourse={selectedCourse}
+                    collegeName={currentCollege.name}
+                  />
+
                   <Map
                     latitude={currentCollege.latitude || 0}
                     longitude={currentCollege.longitude || 0}

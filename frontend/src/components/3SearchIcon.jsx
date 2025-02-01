@@ -57,6 +57,7 @@ const SearchIcon = ({ onSearch }) => {
       if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
         const selectedSuggestion = suggestions[highlightedIndex];
         setQuery(selectedSuggestion);
+
         onSearch(selectedSuggestion);
       } else if (query.trim() !== "") {
         // Otherwise, trigger search with the current query
@@ -89,7 +90,7 @@ const SearchIcon = ({ onSearch }) => {
   const handleSuggestionClick = (suggestion) => {
     setQuery(suggestion); // Fill the input with the selected suggestion
     onSearch(suggestion); // Trigger search
-
+    
     setIsSuggestionVisible(false); // Hide suggestions after selection
   };
 
