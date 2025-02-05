@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import Scraper from "./components/15Scraper";
 
 // Global Styles
 import "./App.css";
@@ -271,6 +272,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/scraper" element={<Scraper />} />
       </Routes>
       <Toaster />
     </div>

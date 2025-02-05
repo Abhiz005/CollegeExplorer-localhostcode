@@ -11,8 +11,9 @@
   "author": "Abhinandan",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
+    "cheerio": "^1.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -22,6 +23,8 @@
     "mailtrap": "^3.4.0",
     "mongoose": "^8.8.1",
     "nodemailer": "^6.9.16",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "pdf-parse": "^1.1.1",
+    "puppeteer": "^24.1.1"
   }
 }

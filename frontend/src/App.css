@@ -2072,3 +2072,131 @@ footer {
     padding: 4.5rem 2rem 3.5rem;
   }
 }
+
+/*///////////////////////////*/
+/* === Background Animation === */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #ff416c, #ff4b2b, #1e3c72, #2a5298);
+  background-size: 400% 400%;
+  z-index: -1;
+  animation: gradientMove 8s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* === Container === */
+.scraper-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+/* === Scan Button === */
+.scan-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.scan-button:hover {
+  background: #0056b3;
+}
+
+.scan-button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+/* === Loading Text === */
+.loading-text {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 20px;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+/* === Table Styling === */
+.table-container {
+  width: 90%;
+
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  color: white;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.styled-table th {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.styled-table tbody tr {
+  transition: background 0.3s ease;
+}
+
+.styled-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* === Responsive Design === */
+@media (max-width: 600px) {
+  .scan-button {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
+
+  .styled-table th,
+  .styled-table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+}

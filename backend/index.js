@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import collegeRoute from "./route/college.route.js";
 import feedbackRoutes from "./route/college.route.js";
 import Review from "./route/college.route.js";
+import scraperRoute from "./route/scraper.route.js";
 
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -37,6 +38,9 @@ app.use("/api/auth", authRoutes);
 ///
 app.use("/feedback", feedbackRoutes);
 app.use("/review", Review);
+
+app.use("/scraper", scraperRoute);
+//app.use("/scraper", scraperRoute);
 app.listen(PORT, () => {
   console.log(`Server app listening on port ${PORT}`);
 });
