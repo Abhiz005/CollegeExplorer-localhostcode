@@ -7,6 +7,7 @@ import {
   getReviews,
 } from "../controller/college_controller.js";
 
+
 const router = express.Router();
 
 // Route for fetching all colleges
@@ -18,4 +19,5 @@ router.get("/search", searchColleges);
 // Route for sending feedback
 router.post("/feedback", sendFeedback); // Use POST instead of PUT
 router.get("/review", getReviews);
+
 export default router;

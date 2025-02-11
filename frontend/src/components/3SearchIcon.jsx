@@ -18,7 +18,7 @@ const SearchIcon = ({ onSearch }) => {
     "BA",
     "BAF",
     "BMM",
-    "Bsc",
+    "BSc",
     "BMS",
     "BCom(Economics)",
     "BCom(Economics & Analytics)",
@@ -90,7 +90,7 @@ const SearchIcon = ({ onSearch }) => {
   const handleSuggestionClick = (suggestion) => {
     setQuery(suggestion); // Fill the input with the selected suggestion
     onSearch(suggestion); // Trigger search
-    
+
     setIsSuggestionVisible(false); // Hide suggestions after selection
   };
 
