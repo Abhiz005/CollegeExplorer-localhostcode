@@ -6,6 +6,7 @@ import feedbackRoutes from "./route/college.route.js";
 import Review from "./route/college.route.js";
 import scraperRoute from "./route/scraper.route.js";
 import reviewRoutes from "./route/review.route.js";
+import saveRoutes from "./route/save.route.js";
 
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -31,6 +32,7 @@ try {
   console.log("Error:", error);
 }
 // Increase the request body size limit
+
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 //defing routes
@@ -44,6 +46,7 @@ app.use("/review", Review);
 
 app.use("/scraper", scraperRoute);
 app.use("/review-add", reviewRoutes);
+app.use("/", saveRoutes);
 //app.use("/scraper", scraperRoute);
 app.listen(PORT, () => {
   console.log(`Server app listening on port ${PORT}`);

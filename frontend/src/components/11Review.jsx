@@ -92,7 +92,7 @@ const Review = ({ selectedCourse: userSelectedCourse, collegeName }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle file upload (convert image to Base64)
+  // Handle file upload 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -217,13 +217,7 @@ const Review = ({ selectedCourse: userSelectedCourse, collegeName }) => {
                 onChange={handleInputChange}
                 required
               />
-              <textarea
-                name="description"
-                placeholder="Your Review"
-                value={formData.description}
-                onChange={handleInputChange}
-                required
-              />
+
               {/* College Dropdown */}
               <select
                 value={selectedCollege}
@@ -250,6 +244,13 @@ const Review = ({ selectedCourse: userSelectedCourse, collegeName }) => {
                   </option>
                 ))}
               </select>
+              <textarea
+                name="description"
+                placeholder="Your Review"
+                value={formData.description}
+                onChange={handleInputChange}
+                required
+              />
               {/* Image Upload */}
               <input
                 type="file"

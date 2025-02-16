@@ -3,7 +3,7 @@ import axios from "axios";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Scraper from "./components/15Scraper";
-
+import SaveButton from "./components/9save";
 // Global Styles
 import "./App.css";
 
@@ -59,7 +59,9 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
-
+  const handleSave = () => {
+    alert("Save button clicked!");
+  };
   // Fetch colleges data and memoize sorting logic
   const fetchColleges = useCallback(async () => {
     try {
@@ -206,6 +208,7 @@ function App() {
                       currentCollege.fees || ["Search Courses"]
                     }
                   />
+                  <SaveButton onClick={handleSave} />
                   <Review
                     selectedCourse={selectedCourse}
                     collegeName={currentCollege.name}

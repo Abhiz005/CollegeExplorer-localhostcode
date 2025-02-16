@@ -2200,20 +2200,31 @@ footer {
     font-size: 14px;
   }
 }
-
+/* Write review css */
+/* Centered and modern write-review button */
 .write-review-button {
-  position: fixed; /* Keeps it fixed in the viewport */
-  bottom: 20px; /* Distance from the bottom */
-  right: 20px; /* Distance from the right */
-  background-color: blue;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: rgb(255, 247, 247);
   border: none;
-  z-index: 1000;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.write-review-button:hover {
+  background: linear-gradient(135deg, #0056b3, #003d80);
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* Swiper container */
 .swiper-container {
   width: 100%;
   padding: 20px;
@@ -2224,85 +2235,84 @@ footer {
   color: black;
 }
 
+/* Modal */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 70%;
-  height: 70%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  animation: fadeIn 0.3s ease-in-out;
-
-  /* Centering it properly */
-  transform: translate(-50%, -50%);
-}
-
-.glossy-modal {
-  background: rgba(255, 255, 255, 0.15);
+  width: 80%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
   border-radius: 15px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(15px);
-  color: white;
-  text-align: center;
-  transform: scale(0.9);
-  animation: scaleIn 0.3s ease-in-out forwards;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Softer shadow for a more elegant effect */
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+  backdrop-filter: blur(15px); /* Frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for better definition */
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translate(-50%, -60%);
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    transform: scale(0.9);
-  }
-  to {
-    transform: scale(1);
+    transform: translate(-50%, -50%);
   }
 }
 
 .modal-content input,
-.modal-content textarea {
+.modal-content textarea,
+.modal-content select {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border-radius: 8px;
-  border: none;
-  background: rgba(255, 255, 255, 0.3);
-  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Matches glossy style */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.4
+  ); /* Slight transparency for input fields */
+  color: #333;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+  border-color: #007bff;
 }
 
 .modal-content button {
-  padding: 10px 15px;
+  padding: 12px 20px;
   margin: 5px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  font-weight: bold;
+  background: #007bff;
+  color: white;
+  transition: all 0.3s ease;
 }
 
 .modal-content button:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: #0056b3;
+  transform: translateY(-3px);
 }
-/* Close button (X) */
+
+/* Close button */
 .close-button {
   position: absolute;
   top: 10px;
   right: 15px;
   background: none;
   border: none;
-  color: white;
-  font-size: 20px;
+  color: #333;
+  font-size: 24px;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -2311,10 +2321,11 @@ footer {
   color: #ff5c5c;
   transform: scale(1.2);
 }
+
 /* Success/Error Message */
 .message {
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   font-weight: bold;
 }
@@ -2325,4 +2336,142 @@ footer {
 
 .message.error {
   color: #ff5c5c; /* Red for error */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .write-review-button {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .modal {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .modal-content input,
+  .modal-content textarea {
+    font-size: 14px;
+  }
+
+  .modal-content button {
+    font-size: 14px;
+  }
+}
+
+/*scrapper button ///*/
+.scraper-button {
+  padding: 10px 20px;
+  font-size: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 35px; /* 20px from the bottom */
+  right: 2%; /* Center horizontally */
+  transform: translateX(-50%); /* Shift back by half the button's width */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional */
+}
+/*  EDIT &DELETE in DASHBOARDPAGE CSS*/
+/* Edit button */
+.edit-button {
+  padding: 8px 15px;
+  font-size: 14px;
+  background: #4caf50; /* Green for edit */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button:hover {
+  background: #45a049; /* Darker green for hover */
+  transform: scale(1.05); /* Slight grow effect */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Delete button */
+.delete-button {
+  padding: 8px 15px;
+  font-size: 14px;
+  background: #f44336; /* Red for delete */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+}
+
+.delete-button:hover {
+  background: #d32f2f; /* Darker red for hover */
+  transform: scale(1.05); /* Slight grow effect */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+/* Edit Form Styling */
+/* Specific styling for edit form fields */
+.edit-form input.edit-name,
+.edit-form textarea.edit-description {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  background: rgba(66, 65, 65, 0.8); /* Glossy background */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.edit-form input.edit-name:focus,
+.edit-form textarea.edit-description:focus {
+  border-color: #4caf50; /* Green outline when focused */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+  outline: none;
+}
+
+/* Buttons within the edit form */
+.edit-form button.save-button,
+.edit-form button.cancel-button {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form button.save-button {
+  background: #4caf50; /* Green Save Button */
+  color: white;
+  margin: 78px;
+}
+
+.edit-form button.save-button:hover {
+  background: #45a049; /* Darker green */
+  transform: scale(1.05);
+}
+
+.edit-form button.cancel-button {
+  background: #f44336; /* Red Cancel Button */
+  color: white;
+  margin-left: 10px;
+}
+
+.edit-form button.cancel-button:hover {
+  background: #d32f2f;
+  transform: scale(1.05);
+}
+/* save button.....*/
+.save-button {
+  position: absolute;
+  right: 18%;
+  bottom: 19%;
 }

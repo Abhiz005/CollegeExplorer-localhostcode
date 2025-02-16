@@ -1,7 +1,7 @@
 import React from "react";
 
 function Map({ latitude, longitude }) {
-  const mapUrl = `https://maps.gomaps.pro/maps/embed//place?key=AlzaSyf7STzoadEPUrQUhQW1I-h2CmTNjMelI-h&center=${latitude},${longitude}&q=${latitude},${longitude}&zoom=15`;
+  const mapUrl = `https://maps.gomaps.pro/maps/embed/v1/place?key=AlzaSyybNflaefCxAn6q9mk4oR3imS0YJ-gp36D&center=${latitude},${longitude}&q=${latitude},${longitude}&zoom=15`;
 
   return (
     <div>

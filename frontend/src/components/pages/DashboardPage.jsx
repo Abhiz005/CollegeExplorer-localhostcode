@@ -9,6 +9,7 @@ const DashboardPage = () => {
   const { user, logout } = useAuthStore();
   const [userReviews, setUserReviews] = useState([]);
   const [colleges, setColleges] = useState([]);
+  const [savedColleges, setSavedColleges] = useState([]);
   const [editingReview, setEditingReview] = useState(null);
   const [editFormData, setEditFormData] = useState({
     name: "",
@@ -33,7 +34,25 @@ const DashboardPage = () => {
     }
   }, [user]);
 
-  // Fetch colleges
+  // Fetch saved colleges
+  useEffect(() => {
+    const fetchSavedColleges = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4001/saved/${user._id}`
+        );
+        setSavedColleges(response.data);
+      } catch (error) {
+        console.error("Error fetching saved colleges:", error);
+      }
+    };
+
+    if (user?._id) {
+      fetchSavedColleges();
+    }
+  }, [user]);
+
+  // Fetch all colleges
   useEffect(() => {
     const fetchColleges = async () => {
       try {
@@ -84,6 +103,13 @@ const DashboardPage = () => {
   };
 
   const handleDeleteReview = async (reviewId) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this review?"
+    );
+    if (!isConfirmed) {
+      return;
+    }
+
     try {
       await axios.delete(
         `http://localhost:4001/review-add/review-delete/${reviewId}`
@@ -135,30 +161,36 @@ const DashboardPage = () => {
               <p>No reviews written yet.</p>
             ) : (
               userReviews.map((review) => {
-                // Find the college corresponding to review.college_id
                 const college = colleges.find(
-                  (college) => college._id === review.college_id
+                  (col) => col._id === review.college_id
                 );
 
                 return (
                   <div key={review._id} className="review-item">
                     {editingReview === review._id ? (
-                      <form onSubmit={handleEditSubmit}>
+                      <form className="edit-form" onSubmit={handleEditSubmit}>
                         <input
                           type="text"
                           name="name"
                           value={editFormData.name}
                           onChange={handleEditChange}
+                          className="edit-name"
                           required
                         />
                         <textarea
                           name="description"
                           value={editFormData.description}
                           onChange={handleEditChange}
+                          className="edit-description"
                           required
                         />
-                        <button type="submit">Save</button>
-                        <button onClick={() => setEditingReview(null)}>
+                        <button type="submit" className="save-button">
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setEditingReview(null)}
+                          className="cancel-button"
+                        >
                           Cancel
                         </button>
                       </form>
@@ -169,20 +201,28 @@ const DashboardPage = () => {
                           {review.name}
                         </p>
                         <p>
-                          <strong>Your Review: </strong>
-                          {review.description}
-                        </p>
-                        <p>
-                          <strong>College:</strong>{" "}
+                          <strong>College Name: </strong>
                           {college ? college.name : "Unknown College"}
                         </p>
                         <p>
-                          <strong>Course:</strong> {review.course_id}
+                          <strong>Course Name: </strong>
+                          {review ? review.course_id : "Unknown Course"}
                         </p>
-                        <button onClick={() => handleEditClick(review)}>
+                        <p>
+                          <strong>Your Review: </strong>
+                          {review.description}
+                        </p>
+
+                        <button
+                          className="edit-button"
+                          onClick={() => handleEditClick(review)}
+                        >
                           Edit
                         </button>
-                        <button onClick={() => handleDeleteReview(review._id)}>
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDeleteReview(review._id)}
+                        >
                           Delete
                         </button>
                       </>
@@ -190,6 +230,34 @@ const DashboardPage = () => {
                   </div>
                 );
               })
+            )}
+          </motion.div>
+
+          <motion.div className="card">
+            <h3 className="card-title">Your Saved Colleges</h3>
+            {savedColleges.length === 0 ? (
+              <p>No colleges saved yet.</p>
+            ) : (
+              savedColleges.map((saved) => (
+                <div key={saved._id} className="saved-college-item">
+                  <p>
+                    <strong>College Name: </strong>
+                    {saved.collegeName}
+                  </p>
+                  <p>
+                    <strong>Course Name: </strong>
+                    {saved.courseName}
+                  </p>
+                  <p>
+                    <strong>Location: </strong>
+                    {saved.location}
+                  </p>
+                  <p>
+                    <strong>Fees: </strong>
+                    {saved.courseFees.join(", ")}
+                  </p>
+                </div>
+              ))
             )}
           </motion.div>
         </div>
