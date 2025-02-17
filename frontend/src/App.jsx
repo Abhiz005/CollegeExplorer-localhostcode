@@ -162,7 +162,7 @@ function App() {
   const courseDetails = selectedCourse
     ? currentCollege.courses?.[selectedCourse] || {}
     : {};
-  // console.log("selected course:", selectedCourse);
+  console.log("selected course:", selectedCourse);
   // console.log("currentCollege.name:", currentCollege.name);
   return (
     <div>
@@ -200,6 +200,7 @@ function App() {
                     }
                     onLike={incrementLikeCount}
                   />
+
                   <Info
                     name={currentCollege.name || "Unknown"}
                     location={currentCollege.location || "N/A"}
@@ -208,12 +209,17 @@ function App() {
                       currentCollege.fees || ["Search Courses"]
                     }
                   />
-                  <SaveButton onClick={handleSave} />
+                  <SaveButton
+                    onClick={handleSave}
+                    collegeId={currentCollege._id}
+                    location={currentCollege.location}
+                    fees={courseDetails.fees || currentCollege.fees}
+                    selectedCourse={selectedCourse}
+                  />
                   <Review
                     selectedCourse={selectedCourse}
                     collegeName={currentCollege.name}
                   />
-
                   <Map
                     latitude={currentCollege.latitude || 0}
                     longitude={currentCollege.longitude || 0}
