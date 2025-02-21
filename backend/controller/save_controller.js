@@ -1,4 +1,5 @@
 import Save from "../model/save_model.js";
+import axios from "axios";
 
 // Save a college or a specific course
 export const saveCollege = async (req, res) => {
@@ -66,5 +67,27 @@ export const isCollegeSaved = async (req, res) => {
     res.status(200).json({ isSaved: !!saved });
   } catch (error) {
     res.status(500).json({ message: "Error checking save status" });
+  }
+};
+// Controller to fetch all save
+
+export const getSave = async (req, res) => {
+  const { user_id } = req.query;
+
+  if (!user_id) {
+    return res.status(400).json({ message: "User ID is required" });
+  }
+
+  try {
+    const savedItems = await Save.find({ user_id })
+      .select("college_id course_name -_id") // Select only necessary fields
+      .lean(); // Convert to plain JavaScript objects
+
+    res.status(200).json(savedItems);
+  } catch (error) {
+    console.error("Error fetching saved colleges:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching saved colleges or courses" });
   }
 };

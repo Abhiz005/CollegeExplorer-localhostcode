@@ -34,23 +34,43 @@ const DashboardPage = () => {
     }
   }, [user]);
 
-  // Fetch saved colleges
   useEffect(() => {
-    const fetchSavedColleges = async () => {
+    const fetchSavedCollegesWithFees = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4001/saved/${user._id}`
+        // Fetch saved colleges for user
+        const savedResponse = await axios.get(
+          `http://localhost:4001/getsave?user_id=${user._id}`
         );
-        setSavedColleges(response.data);
+        const savedData = savedResponse.data;
+
+        // Merge saved colleges with detailed college data
+        const updatedSavedColleges = savedData.map((saved) => {
+          const college = colleges.find((col) => col._id === saved.college_id);
+
+          if (!college) return saved; // Skip if college is not found
+
+          // Find course details dynamically using saved.course_name
+          const courseDetails = college.courses[saved.course_name];
+
+          return {
+            ...saved,
+            collegeName: college.name,
+            location: college.location,
+            image: college.image,
+            fees: courseDetails ? courseDetails.fees : ["Not Available"], // Get fees
+          };
+        });
+
+        setSavedColleges(updatedSavedColleges);
       } catch (error) {
         console.error("Error fetching saved colleges:", error);
       }
     };
 
-    if (user?._id) {
-      fetchSavedColleges();
+    if (user?._id && colleges.length > 0) {
+      fetchSavedCollegesWithFees();
     }
-  }, [user]);
+  }, [user, colleges]);
 
   // Fetch all colleges
   useEffect(() => {
@@ -234,27 +254,27 @@ const DashboardPage = () => {
           </motion.div>
 
           <motion.div className="card">
-            <h3 className="card-title">Your Saved Colleges</h3>
+            <h3 className="card-title">Your Saved Colleges List</h3>
             {savedColleges.length === 0 ? (
               <p>No colleges saved yet.</p>
             ) : (
               savedColleges.map((saved) => (
-                <div key={saved._id} className="saved-college-item">
+                <div key={saved._id} className="saved-college-box">
                   <p>
                     <strong>College Name: </strong>
-                    {saved.collegeName}
+                    {saved.collegeName || "Unknown College"}
                   </p>
                   <p>
                     <strong>Course Name: </strong>
-                    {saved.courseName}
+                    {saved.course_name}
                   </p>
                   <p>
                     <strong>Location: </strong>
-                    {saved.location}
+                    {saved.location || "Unknown"}
                   </p>
                   <p>
                     <strong>Fees: </strong>
-                    {saved.courseFees.join(", ")}
+                    {saved.fees?.join(", ") || "N/A"}
                   </p>
                 </div>
               ))
