@@ -30,7 +30,7 @@ function SaveButton({ collegeId, location, fees, selectedCourse }) {
     }
 
     try {
-      const courseToSave = selectedCourse || "default"; 
+      const courseToSave = selectedCourse || "default";
 
       if (!isSaved) {
         await axios.post("http://localhost:4001/save", {

@@ -20,8 +20,6 @@ const SearchIcon = ({ onSearch }) => {
     "BMM",
     "BSc",
     "BMS",
-    "BCom(Economics)",
-    "BCom(Economics & Analytics)",
   ];
 
   // Handle toggling the expanded search box

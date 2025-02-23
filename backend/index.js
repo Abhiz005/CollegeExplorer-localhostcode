@@ -7,6 +7,7 @@ import Review from "./route/college.route.js";
 import scraperRoute from "./route/scraper.route.js";
 import reviewRoutes from "./route/review.route.js";
 import saveRoutes from "./route/save.route.js";
+import likeRoutes from "./route/like.route.js";
 
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -47,6 +48,8 @@ app.use("/review", Review);
 app.use("/scraper", scraperRoute);
 app.use("/review-add", reviewRoutes);
 app.use("/", saveRoutes);
+app.use("/", likeRoutes);
+
 //app.use("/scraper", scraperRoute);
 app.listen(PORT, () => {
   console.log(`Server app listening on port ${PORT}`);

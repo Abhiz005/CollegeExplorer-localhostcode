@@ -86,14 +86,14 @@ function App() {
     fetchColleges();
   }, [fetchColleges]);
 
-  // Handle search with debouncing
   const handleSearch = useCallback(
     (query) => {
+      console.log("Search query received:", query);
       setSearchQuery(query);
 
       if (!query.trim()) {
+        console.log("Query is empty, resetting data.");
         setFilteredColleges(collegeData);
-
         setSelectedCourse(null);
         setCurrentIndex(0);
         return;
@@ -101,16 +101,22 @@ function App() {
 
       const results = collegeData.filter((college) =>
         Object.keys(college.courses).some(
-          (course) => course.toLowerCase() === query.toLowerCase() // Exact match
+          (course) => course.toLowerCase() === query.toLowerCase()
         )
       );
 
-      // Find the first matching course for the query
+      console.log("Filtered colleges:", results);
+
       const courseMatch = results.length
-        ? Object.keys(results[0].courses).find((course) =>
+        ? Object.keys(results[0].courses).find(
+            (course) => course.toLowerCase() === query.toLowerCase()
+          ) ||
+          Object.keys(results[0].courses).find((course) =>
             course.toLowerCase().includes(query.toLowerCase())
           )
         : null;
+
+      console.log("First matched course:", courseMatch);
 
       setFilteredColleges(results);
       setSelectedCourse(courseMatch || null);
@@ -121,39 +127,33 @@ function App() {
 
   // Increment like count and update backend
   // Increment like count and update backend
-  const incrementLikeCount = async () => {
+  const incrementLikeCount = (newLikeCount) => {
     const currentCollege = filteredColleges[currentIndex];
     if (!currentCollege) return;
 
-    // Check if we have selected a course
-    const isCourseLike =
-      selectedCourse && currentCollege.courses[selectedCourse];
-
-    // Prepare the payload based on whether it's a course or general like count
-    const payload = isCourseLike
-      ? {
-          courseName: selectedCourse,
-          likeCount: currentCollege.courses[selectedCourse].likeCountCourse + 1,
+    const updatedColleges = filteredColleges.map((college) => {
+      if (college._id === currentCollege._id) {
+        if (selectedCourse) {
+          // Update like count for the specific course
+          return {
+            ...college,
+            courses: {
+              ...college.courses,
+              [selectedCourse]: {
+                ...college.courses[selectedCourse],
+                likeCountCourse: newLikeCount,
+              },
+            },
+          };
+        } else {
+          // Update overall like count
+          return { ...college, likeCount: newLikeCount };
         }
-      : { likeCount: currentCollege.likeCount + 1 };
+      }
+      return college;
+    });
 
-    try {
-      const response = await axios.put(
-        `http://localhost:4001/college/${currentCollege._id}`,
-        payload
-      );
-
-      const updatedCollege = response.data;
-
-      // Optimistically update filteredColleges with the new like count
-      const updatedColleges = filteredColleges.map((college) =>
-        college._id === updatedCollege._id ? updatedCollege : college
-      );
-      setFilteredColleges(updatedColleges);
-    } catch (error) {
-      console.error("Error updating like count:", error);
-      toast.error("Failed to update like count.");
-    }
+    setFilteredColleges(updatedColleges);
   };
 
   if (isCheckingAuth) return <LoadingSpinner />;
@@ -199,6 +199,8 @@ function App() {
                         : currentCollege.likeCount || 0
                     }
                     onLike={incrementLikeCount}
+                    collegeId={currentCollege._id}
+                    selectedCourse={selectedCourse}
                   />
 
                   <Info

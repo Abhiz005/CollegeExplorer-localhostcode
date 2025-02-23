@@ -121,7 +121,40 @@ const DashboardPage = () => {
       console.error("Error updating review:", error);
     }
   };
+  const [likedColleges, setLikedColleges] = useState([]);
 
+  useEffect(() => {
+    const fetchLikedColleges = async () => {
+      try {
+        const likedResponse = await axios.get(
+          `http://localhost:4001/getlike?user_id=${user._id}`
+        );
+        const likedData = likedResponse.data;
+
+        // Merge liked colleges with detailed college data
+        const updatedLikedColleges = likedData.map((liked) => {
+          const college = colleges.find((col) => col._id === liked.college_id);
+          if (!college) return liked; // Skip if college not found
+
+          const courseDetails = college.courses[liked.course_name];
+
+          return {
+            ...liked,
+            collegeName: college.name,
+            location: college.location,
+          };
+        });
+
+        setLikedColleges(updatedLikedColleges);
+      } catch (error) {
+        console.error("Error fetching liked colleges:", error);
+      }
+    };
+
+    if (user?._id && colleges.length > 0) {
+      fetchLikedColleges();
+    }
+  }, [user, colleges]);
   const handleDeleteReview = async (reviewId) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this review?"
@@ -254,6 +287,32 @@ const DashboardPage = () => {
           </motion.div>
 
           <motion.div className="card">
+            <h3 className="card-title">Your Liked Colleges List</h3>
+            {likedColleges.length === 0 ? (
+              <p>No colleges liked yet.</p>
+            ) : (
+              likedColleges.map((liked) => (
+                <div key={liked._id} className="saved-college-box">
+                  <p>
+                    <strong>College Name: </strong>
+                    {liked.collegeName || "Unknown College"}
+                  </p>
+                  <p>
+                    <strong>Course Name: </strong>
+                    {liked.course_name === "default"
+                      ? "Top Colleges"
+                      : `${liked.course_name}`}
+                  </p>
+                  <p>
+                    <strong>Location: </strong>
+                    {liked.location || "Unknown"}
+                  </p>
+                </div>
+              ))
+            )}
+          </motion.div>
+
+          <motion.div className="card">
             <h3 className="card-title">Your Saved Colleges List</h3>
             {savedColleges.length === 0 ? (
               <p>No colleges saved yet.</p>
@@ -266,7 +325,9 @@ const DashboardPage = () => {
                   </p>
                   <p>
                     <strong>Course Name: </strong>
-                    {saved.course_name}
+                    {saved.course_name === "default"
+                      ? "Top Colleges"
+                      : `${saved.course_name}`}
                   </p>
                   <p>
                     <strong>Location: </strong>
