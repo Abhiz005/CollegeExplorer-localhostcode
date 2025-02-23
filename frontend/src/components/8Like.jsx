@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Heart } from "lucide-react";
-import { toast } from "react-hot-toast";
+import { ThumbsUp } from "lucide-react"; // Changed Heart to ThumbsUp
 import axios from "axios";
 import { useAuthStore } from "./store/authStore";
+import { motion } from "framer-motion";
 
 function LikeButton({ collegeId, selectedCourse, likeCount, onLike }) {
   const [isLiked, setIsLiked] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("white"); // State for message color
   const { isAuthenticated, user } = useAuthStore();
 
   useEffect(() => {
@@ -25,56 +27,67 @@ function LikeButton({ collegeId, selectedCourse, likeCount, onLike }) {
 
   const handleLikeClick = async () => {
     if (!isAuthenticated) {
-      toast.error("Please log in to use this feature.");
+      setMessage("Please log in to use this feature.");
+      setMessageColor("white"); // Default message color
       return;
     }
 
     try {
-      let response;
       const courseToSave = selectedCourse || "default";
 
       if (!isLiked) {
-        response = await axios.post("http://localhost:4001/like", {
+        await axios.post("http://localhost:4001/like", {
           user_id: user._id,
           college_id: collegeId,
           course_name: courseToSave,
         });
-        toast.success("Liked successfully!");
-        onLike(likeCount + 1); // Increment like count manually
+        onLike(likeCount + 1);
+        setMessage("Liked!");
+        setMessageColor("green"); // Green for "Liked!"
       } else {
-        response = await axios.post("http://localhost:4001/unlike", {
+        await axios.post("http://localhost:4001/unlike", {
           user_id: user._id,
           college_id: collegeId,
           course_name: courseToSave,
         });
-        toast.error("Unliked successfully!");
-        onLike(likeCount - 1); // Decrement like count manually
+        onLike(likeCount - 1);
+        setMessage("Unliked!");
+        setMessageColor("red"); // Red for "Unliked!"
       }
 
       setIsLiked(!isLiked);
+      setTimeout(() => setMessage(""), 2000);
     } catch (error) {
       console.error("Error liking/unliking:", error);
-      toast.error(error.response?.data?.message || "An error occurred.");
+      setMessage("An error occurred.");
+      setMessageColor("white");
     }
   };
 
   return (
-    <div>
-      <button
-        className="like-button"
-        onClick={handleLikeClick}
-        style={{
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          gap: "5px",
-        }}
-      >
-        <Heart size={32} stroke="white" fill={isLiked ? "red" : "none"} />
-        <span style={{ color: "white", fontSize: "16px" }}>{likeCount}</span>
+    <div className="like-button-container">
+      <button className="like-button" onClick={handleLikeClick}>
+        <motion.div
+          whileTap={{ scale: 1.2 }}
+          animate={{ scale: isLiked ? 1.1 : 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ThumbsUp size={32} stroke="white" fill={isLiked ? "blue" : "none"} />
+        </motion.div>
+        <span className="like-count">{likeCount}</span>
       </button>
+      {message && (
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.5 }}
+          className="like-message"
+          style={{ color: messageColor }} // Apply dynamic color
+        >
+          {message}
+        </motion.p>
+      )}
     </div>
   );
 }

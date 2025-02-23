@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Bookmark } from "lucide-react";
-import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useAuthStore } from "./store/authStore";
+import { motion } from "framer-motion";
 
 function SaveButton({ collegeId, location, fees, selectedCourse }) {
   const [isSaved, setIsSaved] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("white"); // Message color state
   const { isAuthenticated, user } = useAuthStore();
 
   useEffect(() => {
@@ -25,7 +27,8 @@ function SaveButton({ collegeId, location, fees, selectedCourse }) {
 
   const handleSaveClick = async () => {
     if (!isAuthenticated) {
-      toast.error("Please log in to use this feature.");
+      setMessage("Please log in to use this feature.");
+      setMessageColor("white");
       return;
     }
 
@@ -40,37 +43,54 @@ function SaveButton({ collegeId, location, fees, selectedCourse }) {
           location,
           fees,
         });
-        toast.success("College saved successfully!");
+        setMessage("Saved!");
+        setMessageColor("green"); // Green for "Saved!"
       } else {
-        // IMPORTANT: Pass the same course_name to unsave
         await axios.post("http://localhost:4001/unsave", {
           user_id: user._id,
           college_id: collegeId,
           course_name: courseToSave,
         });
-        toast.error("College unsaved!");
+        setMessage("Unsaved!");
+        setMessageColor("red"); // Red for "Unsaved!"
       }
 
       setIsSaved(!isSaved);
+      setTimeout(() => setMessage(""), 2000); // Hide message after 2 seconds
     } catch (error) {
-      toast.error("Error saving college.");
-      console.error(error);
+      console.error("Error saving college.", error);
+      setMessage("An error occurred.");
+      setMessageColor("white");
     }
   };
 
   return (
-    <div>
-      <button
-        className="save-button"
-        onClick={handleSaveClick}
-        style={{
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        <Bookmark size={32} stroke="white" fill={isSaved ? "white" : "none"} />
+    <div className="save-button-container">
+      <button className="save-button" onClick={handleSaveClick}>
+        <motion.div
+          whileTap={{ scale: 1.2 }}
+          animate={{ scale: isSaved ? 1.1 : 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          <Bookmark
+            size={32}
+            stroke="white"
+            fill={isSaved ? "white" : "none"}
+          />
+        </motion.div>
       </button>
+      {message && (
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.5 }}
+          className="save-message"
+          style={{ color: messageColor }}
+        >
+          {message}
+        </motion.p>
+      )}
     </div>
   );
 }

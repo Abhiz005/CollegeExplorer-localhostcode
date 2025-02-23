@@ -281,7 +281,7 @@ ul li {
   padding: 10px;
   width: 60%;
   max-width: 800px;
-  margin: 15px auto 0px auto;
+  margin: -10px auto 0px auto;
   text-align: center;
   background: linear-gradient(to right, #4a5c68, #3b4f60);
 
@@ -530,33 +530,103 @@ ul li {
   animation: appear 0.6s linear;
 }
 /*/////////////////////////////////////////Like.css /////////////////////////////////////////*/
-.like-container {
+/* Like button container */
+.like-button-container {
+  position: relative;
   display: flex;
+  left: 17%;
   align-items: center;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  animation: appear 0.5s linear;
+  top: 28px;
+  width: 30%;
 }
 
+/* Like button styling */
 .like-button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 24px;
-  color: #fff;
-  animation: appear 0.5s linear;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease-in-out;
 }
 
-.like-icon.liked {
-  color: red;
-  animation: appear 0.5s linear;
+.like-button:hover {
+  transform: scale(1.1);
 }
 
+/* Like count */
 .like-count {
-  margin-left: 8px;
-  color: #fff;
+  color: white;
   font-size: 16px;
+  font-weight: bold;
+}
+
+/* Floating popup message */
+.like-message {
+  position: absolute;
+  top: 40px;
+  left: -2%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 17px;
+  white-space: nowrap;
+  animation: fadeInOut 2s ease-in-out;
+  font-weight: bold;
+}
+
+/* Animation for message */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .like-button {
+    gap: 3px;
+  }
+
+  .like-count {
+    font-size: 14px;
+  }
+
+  .like-message {
+    font-size: 12px;
+    top: -25px;
+    padding: 4px 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .like-button {
+    gap: 2px;
+  }
+
+  .like-count {
+    font-size: 12px;
+  }
+
+  .like-message {
+    font-size: 10px;
+    top: -20px;
+    padding: 3px 6px;
+  }
 }
 
 /* ////////////////////////////////Review CSS ////////////////////////////////////////////// */
@@ -610,66 +680,6 @@ ul li {
   border-top-left-radius: 6px; /* Radius for the opposite bend */
 }
 
-/* //////////////////////////////////////////////////LikeButton CSS /////////////////////////////// */
-
-.likeIcon {
-  position: absolute;
-  height: 50px;
-  margin-left: 16rem;
-  margin-top: 6px;
-  z-index: 15;
-  transition: transform 0.3s; /* Smooth transition */
-}
-
-.likeIcon.liked {
-  transform: scale(1.2); /* Scale up on like */
-}
-
-.like-button {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.like-icon {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 24px; /* Size of the like icon */
-}
-
-.like-count {
-  position: absolute;
-  top: 7px; /* Adjust position as needed */
-  left: 281px; /* Adjust position as needed */
-  font-size: 14px; /* Size of the count */
-  color: red; /* Color of the count */
-  z-index: 16;
-  font-weight: bold;
-}
-
-.like-popup {
-  position: absolute;
-  top: 55px; /* Adjust position as needed */
-  left: 255px; /* Adjust position as needed */
-  font-size: 16px; /* Size of the popup text */
-  color: green; /* Color of the popup */
-  opacity: 0.9; /* Make it slightly transparent */
-  animation: fadeIn 0.5s ease-out; /* Animation for pop-up */
-  z-index: 20;
-}
-
-/* Keyframes for pop-up effect */
-@keyframes fadeIn {
-  0% {
-    transform: translateY(-10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 /* //////////////////////////////////////////////////MAP CSS /////////////////////////////// */
 .Map-container {
   margin: auto;
@@ -2470,11 +2480,7 @@ footer {
   transform: scale(1.05);
 }
 /* save button.....*/
-.save-button {
-  position: absolute;
-  right: 18%;
-  bottom: 19%;
-}
+
 .saved-college-box {
   background-color: #1e293b; /* Dark blue background */
   padding: 15px;
@@ -2482,4 +2488,82 @@ footer {
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
   color: white;
+}
+/*SavedICON CSS/////////////////////////*/
+/* Save button container */
+.save-button-container {
+  position: absolute;
+  right: 18%;
+  bottom: 19%;
+}
+
+/* Save button */
+.save-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.save-button:hover {
+  transform: scale(1.1);
+}
+
+/* Save message */
+.save-message {
+  position: absolute;
+  top: 45px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .save-button {
+    transform: scale(0.9);
+  }
+
+  .save-message {
+    font-size: 12px;
+    top: 30px;
+    padding: 4px 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .save-button {
+    transform: scale(0.8);
+  }
+
+  .save-message {
+    font-size: 10px;
+    top: 25px;
+    padding: 3px 6px;
+  }
 }
