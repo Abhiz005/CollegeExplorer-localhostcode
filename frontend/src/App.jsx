@@ -6,7 +6,7 @@ import Scraper from "./components/15Scraper";
 import SaveButton from "./components/9save";
 // Global Styles
 import "./App.css";
-
+import PipeAnimation from "./components/PipeAnimation";
 // Components
 import Header from "./components/1Header";
 import DynamicIsland from "./components/2DynamicIsand";
@@ -29,10 +29,12 @@ import EmailVerificationPage from "./components/pages/EmailVerificationPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import DashboardPage from "./components/pages/DashboardPage";
+import AdminPanel from "./components/pages/adminPanel";
+import AdminLoginPage from "./components/pages/adminloginPage";
 
 // State Management
 import { useAuthStore } from "./components/store/authStore";
-
+import { useAuthadmin } from "./components/store/authadmin";
 // Constants
 const OPTIONS = { loop: true };
 
@@ -42,6 +44,13 @@ const ProtectedRoute = ({ children }) => {
 
   if (!isAuthenticated) return <Navigate to="/login" replace />;
   if (!user.isVerified) return <Navigate to="/verify-email" replace />;
+  return children;
+};
+
+const Protectedadmin = ({ children }) => {
+  const { isAuthenticated } = useAuthadmin();
+
+  if (!isAuthenticated) return <Navigate to="/admin/login" replace />;
   return children;
 };
 
@@ -171,6 +180,7 @@ function App() {
           path="/"
           element={
             <>
+              <PipeAnimation></PipeAnimation>
               <Header />
               <SearchIcon onSearch={handleSearch} />
               <DynamicIsland />
@@ -211,6 +221,7 @@ function App() {
                       currentCollege.fees || ["Search Courses"]
                     }
                   />
+
                   <SaveButton
                     onClick={handleSave}
                     collegeId={currentCollege._id}
@@ -284,6 +295,14 @@ function App() {
           }
         />
         <Route path="/scraper" element={<Scraper />} />
+        <Route
+          path="/admin"
+          element={
+            //   <Protectedadmin>
+            <AdminPanel />
+            //  </Protectedadmin>
+          }
+        />
       </Routes>
       <Toaster />
     </div>

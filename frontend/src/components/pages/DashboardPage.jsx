@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAuthStore } from "../store/authStore";
 import { formatDate } from "../utils/date";
 import Header from "../1Header";
-
+import PipeAnimation from "../PipeAnimation";
 const DashboardPage = () => {
   const { user, logout } = useAuthStore();
   const [userReviews, setUserReviews] = useState([]);
@@ -175,6 +175,7 @@ const DashboardPage = () => {
 
   return (
     <div>
+      <PipeAnimation />
       <Header />
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}

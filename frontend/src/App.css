@@ -34,20 +34,28 @@
   margin-left: -14px;
 }
 @font-face {
-  font-family: "Exima"; /* Name of the font */
-  src: url("/fonts/abnes.otf") format("opentype"); /* Path to the font file */
-  font-weight: normal; /* Adjust if needed */
-  font-style: normal; /* Adjust if needed */
+  font-family: "Exima";
+  src: url("/fonts/Exima Geometric.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "abnes";
+  src: url("/fonts/abnes.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .logo-name {
   display: flex;
   text-align: center;
-  font-size: 33px;
+  font-size: 30px;
   font-family: "Exima", Garamond, sans-serif; /* Fallback to Garamond and sans-serif */
   align-items: center;
-  margin-bottom: -7px;
+  margin-bottom: -3px;
   font-weight: bold;
+  margin-right: 40px;
 }
 
 .navbar {
@@ -163,6 +171,7 @@ ul li {
   z-index: 10;
   opacity: 0;
   font-size: 15px;
+  font-family: abnes;
 }
 
 @keyframes pulsingLight {
@@ -284,7 +293,7 @@ ul li {
   margin: -10px auto 0px auto;
   text-align: center;
   background: linear-gradient(to right, #4a5c68, #3b4f60);
-
+  position: relative;
   box-sizing: border-box;
   animation: appear 0.5s linear;
 }
@@ -820,6 +829,7 @@ footer {
   padding: 15px;
   background: linear-gradient(to right, #548c9f, #8a6b6b);
   color: #ffffff;
+  position: relative;
 }
 /* //////////////////////////////////////////////////top line name CSS /////////////////////////////// */
 #topline {
@@ -1271,9 +1281,9 @@ footer {
 }
 /* General container for the dashboard */
 .dashboard-container {
-  max-width: 50%; /* 512px */
+  max-width: 95%; /* 512px */
   width: 100%;
-  margin-top: 2.5rem; /* 10px */
+  margin-top: 1.5rem; /* 10px */
   padding: 2rem; /* 8px */
   background-color: rgba(31, 41, 55, 0.8); /* bg-gray-900 with opacity */
   backdrop-filter: blur(10px);
@@ -1476,7 +1486,7 @@ footer {
   height: 80vh;
   padding: 5rem;
 
-  overflow: hidden; /* Prevent overflow */
+  overflow: visible; /* Prevent overflow */
   animation: appear linear;
   animation-timeline: view();
   animation-range: entry 0 cover 40%;
@@ -1494,7 +1504,7 @@ footer {
   border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for realism */
   max-width: 800px; /* Restrict card width */
   max-height: 400px; /* Restrict card height */
-  overflow: hidden; /* Ensure the card doesn't overflow */
+  overflow: visible; /* Ensure the card doesn't overflow */
   margin-bottom: 10px;
 }
 
@@ -1614,6 +1624,7 @@ footer {
 .swiper-wrapper {
   overflow: visible;
   margin-bottom: 0.3rem; /* Ensure Swiper container doesn't clip hover effects */
+  margin-top: 0.3rem;
 }
 
 /* Responsive Design */
@@ -2461,7 +2472,7 @@ footer {
 .edit-form button.save-button {
   background: #4caf50; /* Green Save Button */
   color: white;
-  margin: 78px;
+  margin: 0px 0px 10px 10px;
 }
 
 .edit-form button.save-button:hover {
@@ -2494,7 +2505,7 @@ footer {
 .save-button-container {
   position: absolute;
   right: 18%;
-  bottom: 19%;
+  bottom: 21%;
 }
 
 /* Save button */
@@ -2541,6 +2552,201 @@ footer {
     opacity: 0;
     transform: translateY(-10px);
   }
+}
+/* AdminPanel.css */
+
+.admin-panel {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.animated-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2b5876, #4e4376);
+  background-size: 300% 300%;
+  animation: gradientAnimation 10s infinite;
+  filter: blur(80px);
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.admin-content {
+  position: relative;
+  color: white;
+  text-align: center;
+  padding: 5% 10%;
+}
+
+.admin-title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+}
+
+.actions-container {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.action-button {
+  background-color: #0072ff;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #005bb5;
+  transform: translateY(-5px);
+}
+
+.action-button:active {
+  transform: scale(0.95);
+}
+/* forget password css */
+.forgot-password-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1e293b;
+}
+
+.forgot-password-card {
+  max-width: 28rem;
+  width: 100%;
+  background-color: rgba(31, 41, 55, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.forgot-password-content {
+  padding: 2rem;
+}
+
+.forgot-password-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #22c55e, #059669);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.forgot-password-text {
+  color: #e2e8f0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.forgot-password-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(90deg, #22c55e, #059669);
+  color: white;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.forgot-password-button:hover {
+  transform: scale(1.02);
+}
+
+.loader-icon {
+  display: block;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.forgot-password-footer {
+  padding: 1rem;
+  background-color: rgba(17, 24, 39, 0.9);
+  display: flex;
+  justify-content: center;
+}
+
+.back-to-login {
+  color: #22c55e;
+  display: flex;
+  align-items: center;
+}
+
+.back-icon {
+  margin-right: 0.5rem;
+}
+
+.success-icon-wrapper {
+  background-color: #22c55e;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto;
+}
+
+.success-icon {
+  color: white;
+  width: 2rem;
+  height: 2rem;
 }
 
 /* Responsive Design */

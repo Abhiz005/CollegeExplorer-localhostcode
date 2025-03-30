@@ -92,7 +92,7 @@ const Review = ({ selectedCourse: userSelectedCourse, collegeName }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle file upload 
+  // Handle file upload
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -156,7 +156,7 @@ const Review = ({ selectedCourse: userSelectedCourse, collegeName }) => {
           modules={[Navigation, Pagination]}
           spaceBetween={20}
           slidesPerView={3}
-          navigation
+          navigation={false}
           pagination={{ clickable: true }}
           breakpoints={{
             320: { slidesPerView: 1 },

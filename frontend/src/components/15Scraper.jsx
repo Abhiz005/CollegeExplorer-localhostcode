@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Header from "./1Header";
+import PipeAnimation from "./PipeAnimation";
 export default function Scraper() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -23,6 +24,7 @@ export default function Scraper() {
   return (
     <>
       <Header />
+
       <div className="scraper-container">
         <div className="background-animation"></div>
 

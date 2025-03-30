@@ -8,12 +8,13 @@ import scraperRoute from "./route/scraper.route.js";
 import reviewRoutes from "./route/review.route.js";
 import saveRoutes from "./route/save.route.js";
 import likeRoutes from "./route/like.route.js";
+import authRoutes from "./route/auth.route.js";
+import adminRoutes from "./route/admin.route.js";
 
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
 const app = express();
-import authRoutes from "./route/auth.route.js";
 
 app.use(express.json());
 
@@ -49,7 +50,7 @@ app.use("/scraper", scraperRoute);
 app.use("/review-add", reviewRoutes);
 app.use("/", saveRoutes);
 app.use("/", likeRoutes);
-
+app.use("/admin", adminRoutes);
 //app.use("/scraper", scraperRoute);
 app.listen(PORT, () => {
   console.log(`Server app listening on port ${PORT}`);

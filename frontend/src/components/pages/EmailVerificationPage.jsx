@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
 import toast from "react-hot-toast";
-
+import PipeAnimation from "../PipeAnimation";
 const EmailVerificationPage = () => {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
@@ -59,46 +59,49 @@ const EmailVerificationPage = () => {
   }, [code]);
 
   return (
-    <div className="verify-bigcontainer">
-      <div className="verify-container">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="verify-card"
-        >
-          <h2 className="verify-title">Verify Your Email</h2>
-          <p className="verify-subtitle">
-            Enter the 6-digit code sent to your email address.
-          </p>
+    <div>
+      <PipeAnimation />
+      <div className="verify-bigcontainer">
+        <div className="verify-container">
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="verify-card"
+          >
+            <h2 className="verify-title">Verify Your Email</h2>
+            <p className="verify-subtitle">
+              Enter the 6-digit code sent to your email address.
+            </p>
 
-          <form onSubmit={handleSubmit} className="verify-form">
-            <div className="verify-input-container">
-              {code.map((digit, index) => (
-                <input
-                  key={index}
-                  ref={(el) => (inputRefs.current[index] = el)}
-                  type="text"
-                  maxLength="6"
-                  value={digit}
-                  onChange={(e) => handleChange(index, e.target.value)}
-                  onKeyDown={(e) => handleKeyDown(index, e)}
-                  className="verify-input-box"
-                />
-              ))}
-            </div>
-            {error && <p className="verify-error-text">{error}</p>}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              type="submit"
-              disabled={isLoading || code.some((digit) => !digit)}
-              className="verify-submit-button"
-            >
-              {isLoading ? "Verifying..." : "Verify Email"}
-            </motion.button>
-          </form>
-        </motion.div>
+            <form onSubmit={handleSubmit} className="verify-form">
+              <div className="verify-input-container">
+                {code.map((digit, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => (inputRefs.current[index] = el)}
+                    type="text"
+                    maxLength="6"
+                    value={digit}
+                    onChange={(e) => handleChange(index, e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(index, e)}
+                    className="verify-input-box"
+                  />
+                ))}
+              </div>
+              {error && <p className="verify-error-text">{error}</p>}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="submit"
+                disabled={isLoading || code.some((digit) => !digit)}
+                className="verify-submit-button"
+              >
+                {isLoading ? "Verifying..." : "Verify Email"}
+              </motion.button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordStrengthMeter from "../PasswordStrengthMeter";
 import { useAuthStore } from "../store/authStore";
-
+import PipeAnimation from "../PipeAnimation";
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -57,63 +57,66 @@ const SignUpPage = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="sign-up-container"
-    >
-      <div className="sign-up-form">
-        <h2 className="sign-up-header">Create Account</h2>
+    <div>
+      <PipeAnimation />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="sign-up-container"
+      >
+        <div className="sign-up-form">
+          <h2 className="sign-up-header">Create Account</h2>
 
-        <form onSubmit={handleSignUp}>
-          <Input
-            icon={User}
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {errors.name && <p className="error-text">{errors.name}</p>}
-          <Input
-            icon={Mail}
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <p className="error-text">{errors.email}</p>}
-          <Input
-            icon={Lock}
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {errors.password && <p className="error-text">{errors.password}</p>}
-          <PasswordStrengthMeter password={password} />
-          {signupError && <p className="error-text">{signupError}</p>}
+          <form onSubmit={handleSignUp}>
+            <Input
+              icon={User}
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            {errors.name && <p className="error-text">{errors.name}</p>}
+            <Input
+              icon={Mail}
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <p className="error-text">{errors.email}</p>}
+            <Input
+              icon={Lock}
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && <p className="error-text">{errors.password}</p>}
+            <PasswordStrengthMeter password={password} />
+            {signupError && <p className="error-text">{signupError}</p>}
 
-          <motion.button
-            className="submit-button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? <Loader className="loader" size={24} /> : "Sign Up"}
-          </motion.button>
-        </form>
-      </div>
-      <div className="sign-up-footer">
-        <p className="footer-text">
-          Already have an account?{" "}
-          <Link to={"/login"} className="footer-link">
-            Login
-          </Link>
-        </p>
-      </div>
-    </motion.div>
+            <motion.button
+              className="submit-button"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? <Loader className="loader" size={24} /> : "Sign Up"}
+            </motion.button>
+          </form>
+        </div>
+        <div className="sign-up-footer">
+          <p className="footer-text">
+            Already have an account?{" "}
+            <Link to={"/login"} className="footer-link">
+              Login
+            </Link>
+          </p>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
