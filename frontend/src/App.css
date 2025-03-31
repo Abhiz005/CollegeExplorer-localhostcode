@@ -899,9 +899,9 @@ footer {
   margin-bottom: 1.5rem;
   text-align: center;
   background: linear-gradient(
-    to right,
-    #68d391,
-    #34d399
+    45deg,
+    #00b894,
+    #0984e3
   ); /* from-green-400 to-emerald-500 */
   background-clip: text;
   color: transparent;
@@ -918,9 +918,9 @@ footer {
   width: 100%;
   padding: 0.75rem;
   background: linear-gradient(
-    to right,
-    #48bb78,
-    #34d399
+    45deg,
+    #00b894,
+    #0984e3
   ); /* from-green-500 to-emerald-600 */
   color: white;
   font-weight: bold;
@@ -1147,7 +1147,7 @@ footer {
   font-weight: bold;
   margin-bottom: 1.5rem;
   text-align: center;
-  background: linear-gradient(to right, #48bb78, #2d9e66);
+  background: linear-gradient(45deg, #00b894, #0984e3);
   -webkit-background-clip: text;
   color: transparent;
 }
@@ -1171,7 +1171,7 @@ footer {
 .login-button {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(to right, #48bb78, #2d9e66);
+  background: linear-gradient(45deg, #00b894, #0984e3);
   color: white;
   font-weight: bold;
   border-radius: 0.75rem;
@@ -1185,7 +1185,7 @@ footer {
 }
 
 .login-button:hover {
-  background: linear-gradient(to right, #38a169, #2d9e66); /* Hover state */
+  background: linear-gradient(45deg, #00b894, #00cec9); /* Hover state */
 }
 
 .login-button:disabled {
@@ -2557,9 +2557,8 @@ footer {
 
 .admin-panel {
   position: relative;
-  width: 100vw;
+
   height: 100vh;
-  overflow: hidden;
 }
 
 .animated-background {
@@ -2645,6 +2644,114 @@ footer {
 .action-button:active {
   transform: scale(0.95);
 }
+
+.remove-user-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  max-width: 90%; /* Ensure it fits on smaller screens */
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden; /* Prevent inner horizontal scroll */
+}
+
+.remove-user-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.remove-user-section p {
+  color: #ccc;
+}
+
+.remove-user-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.remove-user-section li {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  animation: fadeIn 0.5s ease-in-out;
+  flex-wrap: nowrap; /* Prevents wrapping */
+}
+
+/* ✅ Align name and description to the left */
+.remove-user-section li div {
+  display: flex;
+  flex-direction: column; /* Stack name and description vertically */
+  text-align: left; /* Align text to the left */
+  flex-grow: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-right: 1rem; /* Space between description and button */
+}
+
+/* ✅ Remove button remains on the right */
+.remove-user-section button {
+  background-color: #ff4b5c;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.remove-user-section button:hover {
+  background-color: #d43f50;
+  transform: scale(1.05);
+}
+
+.remove-user-section button:active {
+  transform: scale(0.95);
+}
+
+/* Close Button */
+.remove-user-section .close-btn {
+  background-color: #ccc;
+  color: black;
+}
+
+.remove-user-section .close-btn:hover {
+  background-color: #bbb;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .remove-user-section {
+    padding: 1rem;
+  }
+  .remove-user-section li {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
 /* forget password css */
 .forgot-password-wrapper {
   display: flex;
@@ -2673,7 +2780,7 @@ footer {
   font-weight: bold;
   text-align: center;
   margin-bottom: 1.5rem;
-  background: linear-gradient(90deg, #22c55e, #059669);
+  background: linear-gradient(45deg, #00b894, #0984e3);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -2688,7 +2795,7 @@ footer {
 .forgot-password-button {
   width: 100%;
   padding: 0.75rem;
-  background: linear-gradient(90deg, #22c55e, #059669);
+  background: linear-gradient(45deg, #00b894, #0984e3);
   color: white;
   font-weight: bold;
   border-radius: 0.5rem;
@@ -2698,6 +2805,7 @@ footer {
 
 .forgot-password-button:hover {
   transform: scale(1.02);
+  background: linear-gradient(45deg, #00b894, #00cec9);
 }
 
 .loader-icon {
@@ -2747,6 +2855,88 @@ footer {
   color: white;
   width: 2rem;
   height: 2rem;
+}
+/*RESET PASSWORD CSS*/
+/* Animation */
+@keyframes reset-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reset Card Styling */
+.reset-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: rgba(45, 45, 45, 0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  margin: 80px auto;
+  animation: reset-fade-in 0.6s ease-out;
+  position: relative;
+}
+
+.reset-card-content {
+  padding: 40px;
+}
+
+/* Title */
+.reset-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #00b894, #0984e3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Error and Success Messages */
+.reset-error {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.reset-success {
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* Button Styling */
+.reset-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(45deg, #00b894, #0984e3);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.reset-btn:hover {
+  background: linear-gradient(45deg, #00b894, #00cec9);
+  transform: translateY(-3px);
+}
+
+.reset-btn:disabled {
+  background-color: #636e72;
+  cursor: not-allowed;
 }
 
 /* Responsive Design */

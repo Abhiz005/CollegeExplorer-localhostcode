@@ -9,6 +9,7 @@ import PipeAnimation from "../PipeAnimation";
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { error } = useAuthStore();
 
   const { isLoading, forgotPassword } = useAuthStore();
 
@@ -44,6 +45,7 @@ const ForgotPasswordPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+              {error && <p className="error-message">{error}</p>}
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
