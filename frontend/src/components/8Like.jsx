@@ -29,6 +29,7 @@ function LikeButton({ collegeId, selectedCourse, likeCount, onLike }) {
     if (!isAuthenticated) {
       setMessage("Please log in to use this feature.");
       setMessageColor("white"); // Default message color
+      setTimeout(() => setMessage(""), 2500); // Remove message after 2.5s
       return;
     }
 
@@ -56,7 +57,7 @@ function LikeButton({ collegeId, selectedCourse, likeCount, onLike }) {
       }
 
       setIsLiked(!isLiked);
-      setTimeout(() => setMessage(""), 2000);
+     
     } catch (error) {
       console.error("Error liking/unliking:", error);
       setMessage("An error occurred.");

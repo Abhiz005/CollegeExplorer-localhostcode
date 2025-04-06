@@ -29,6 +29,7 @@ function SaveButton({ collegeId, location, fees, selectedCourse }) {
     if (!isAuthenticated) {
       setMessage("Please log in to use this feature.");
       setMessageColor("white");
+      setTimeout(() => setMessage(""), 2000);
       return;
     }
 

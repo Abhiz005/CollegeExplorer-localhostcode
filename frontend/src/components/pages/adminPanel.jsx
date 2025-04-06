@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PipeAnimation from "../PipeAnimation";
 import axios from "axios";
-
+import Header from "../1Header";
 const AdminPanel = () => {
   const [stats, setStats] = useState({ users: 0, colleges: 0, reviews: 0 });
   const [users, setUsers] = useState([]);
@@ -94,6 +94,7 @@ const AdminPanel = () => {
 
   return (
     <div className="admin-panel">
+      <Header />
       <PipeAnimation />
       <div className="animated-background"></div>
       <motion.div

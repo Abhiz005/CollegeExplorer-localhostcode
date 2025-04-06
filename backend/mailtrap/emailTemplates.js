@@ -7,7 +7,7 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
   <title>Verify Your Email</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <div style="background: linear-gradient(to right, #4CAF50, #45a049); padding: 20px; text-align: center;">
+  <div style="background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC); padding: 20px; text-align: center;">
     <h1 style="color: white; margin: 0;">Verify Your Email</h1>
   </div>
   <div style="background-color: #f9f9f9; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -37,7 +37,7 @@ export const PASSWORD_RESET_SUCCESS_TEMPLATE = `
   <title>Password Reset Successful</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <div style="background: linear-gradient(to right, #4CAF50, #45a049); padding: 20px; text-align: center;">
+  <div style="background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC); padding: 20px; text-align: center;">
     <h1 style="color: white; margin: 0;">Password Reset Successful</h1>
   </div>
   <div style="background-color: #f9f9f9; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -74,7 +74,7 @@ export const PASSWORD_RESET_REQUEST_TEMPLATE = `
   <title>Reset Your Password</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <div style="background: linear-gradient(to right, #4CAF50, #45a049); padding: 20px; text-align: center;">
+  <div style="background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC); padding: 20px; text-align: center;">
     <h1 style="color: white; margin: 0;">Password Reset</h1>
   </div>
   <div style="background-color: #f9f9f9; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -103,7 +103,7 @@ export const WELCOME_EMAIL_TEMPLATE = `
   <title>Welcome to College Explorer</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f7f7f7;">
-  <div style="background: linear-gradient(to right, #4CAF50, #45a049); padding: 20px; text-align: center; border-radius: 10px 10px 0 0;">
+  <div style="background: background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC); padding: 20px; text-align: center; border-radius: 10px 10px 0 0;">
     <h1 style="color: white; margin: 0;">Welcome to College Explorer</h1>
   </div>
   <div style="background-color: #ffffff; padding: 20px; border-radius: 0 0 10px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -120,7 +120,7 @@ export const WELCOME_EMAIL_TEMPLATE = `
     </ul>
     <p>To get started, click the button below:</p>
     <div style="text-align: center; margin: 30px 0;">
-      <a href="{dashboardURL}" style="background-color: #4CAF50; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Dashboard</a>
+      <a href="http://localhost:5173/dashboardPage" style="background-color: #4CAF50; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Dashboard</a>
     </div>
     <p>If you have any questions, feel free to reply to this email. We're here to help!</p>
     <p>Best regards,<br>The College Explorer Team</p>
@@ -133,3 +133,55 @@ export const WELCOME_EMAIL_TEMPLATE = `
 </html>
 `;
 
+export const FEEDBACK_EMAIL_TEMPLATE = ({ name, collegeName, note, email }) => `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Feedback Received</title>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+  <table align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: auto;">
+    <tr>
+      <td style="padding: 30px 0; background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC); text-align: center; border-radius: 8px 8px 0 0;">
+        <h1 style="color: #fff; font-size: 26px; margin: 0;">📩 New Feedback Received</h1>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: #ffffff; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+        <p style="font-size: 16px; margin-bottom: 20px;">You have received a new feedback. Details are as follows:</p>
+
+        <table cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 20px;">
+          <tr>
+            <td style="padding: 8px 0;"><strong>Name:</strong></td>
+            <td>${name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0;"><strong>College:</strong></td>
+            <td>${collegeName}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0;"><strong>Email:</strong></td>
+            <td>${email}</td>
+          </tr>
+        </table>
+
+        <p style="margin: 0 0 10px;"><strong>Message:</strong></p>
+        <div style="padding: 15px; background-color: #f1f1f1; border-left: 4px solid #0052D4; border-radius: 4px; font-style: italic; color: #333;">
+          ${note}
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;" />
+        <p style="font-size: 12px; color: #888;">This feedback was submitted via the College Explorer feedback form.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center; padding: 20px; font-size: 12px; color: #aaa;">
+        &copy; ${new Date().getFullYear()} College Explorer. All rights reserved.
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`;

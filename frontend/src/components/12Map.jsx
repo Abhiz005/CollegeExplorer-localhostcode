@@ -1,7 +1,11 @@
 import React from "react";
 
 function Map({ latitude, longitude }) {
-  const mapUrl = `https://maps.gomaps.pro/maps/embed/v1/place?key=AlzaSyybNflaefCxAn6q9mk4oR3imS0YJ-gp36D&center=${latitude},${longitude}&q=${latitude},${longitude}&zoom=15`;
+  const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${
+    longitude - 0.01
+  }%2C${latitude - 0.01}%2C${longitude + 0.01}%2C${
+    latitude + 0.01
+  }&layer=mapnik&marker=${latitude}%2C${longitude}`;
 
   return (
     <div>

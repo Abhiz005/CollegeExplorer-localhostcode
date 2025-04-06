@@ -5,6 +5,7 @@ import {
   PASSWORD_RESET_SUCCESS_TEMPLATE,
   VERIFICATION_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
+  FEEDBACK_EMAIL_TEMPLATE,
 } from "./emailTemplates.js";
 dotenv.config();
 
@@ -100,13 +101,7 @@ export const sendFeedbackEmail = async (feedbackData) => {
     to: "neon37012@gmail.com", // Your email to receive the feedback
     replyTo: email, // This allows replies to go to the user's email address
     subject: `Feedback from ${name} (${collegeName})`,
-    html: `
-      <h3>Feedback Received</h3>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>College Name:</strong> ${collegeName}</p>
-      <p><strong>Note:</strong> ${note}</p>
-      <p><strong>Email:</strong> ${email}</p>
-    `,
+    html: FEEDBACK_EMAIL_TEMPLATE({ name, collegeName, note, email }),
   };
 
   try {
